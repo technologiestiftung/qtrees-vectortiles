@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    mbtileserver:
+        image: consbio/mbtileserver:latest
+        container_name: mbtileserver
+        entrypoint: /mbtileserver --enable-reload-signal
+        restart: always
+        ports:
+            - 26080:8000
+        volumes:
+            - mbtileserver:/tilesets
+
+volumes:
+    mbtileserver:
