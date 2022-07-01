@@ -10,8 +10,9 @@
 
 This project is a small pipeline to generate vector tiles based on a PGSQL Database.
 
-
-
+1. First you have to run a mbtileserver container using the docker-compose file.
+2. Copy the .env.example file to .env and execute the script. 
+3. Run the bash script
 
 ## Credits
 
