@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+    mbtileserver:
+        env_file:
+            - .env
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: qtrees-vectortiles-generator
+        # entrypoint: /mbtileserver --enable-reload-signal
+        restart: always
+        ports:
+            - 26080:8000
+        volumes:
+            - ./_data:/tilesets
