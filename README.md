@@ -1,15 +1,35 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# Vector Tiles pipeline
+# QTrees Vector Tiles Generator
 
-This project is a small pipeline to generate vector tiles based on a PGSQL Database.
+This project is a pipeline to generate vector tiles based on a PGSQL Database. It uses gdal, tippicanoe and mbtileserver to generate and serve vector tiles. It is a part of the QTrees.ai project.
 
-1. First you have to run a mbtileserver container using the docker-compose file.
-2. Copy the .env.example file to .env and execute the script. 
-3. Run the bash script
+## Prequisites
+
+- Docker
+- Postgres DB (also included in docker-compose.override.yml)
+
+## Usage and Development
+
+```bash
+cd path/to/repo
+docker compose up -d
+```
+
+## Tests
+
+Currently the tests only check if the images can be built and if the mbtileserver can be started.
+
+```bash
+cd path/to/repo
+docker-compose up -f docker-compose.yml -f docker-compose.test.yml
+```
 
 ## Credits
 
@@ -38,7 +58,6 @@ This project is a small pipeline to generate vector tiles based on a PGSQL Datab
     </td>
   </tr>
 </table>
-
 
 ## Contributors ✨
 
