@@ -16,6 +16,10 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            args:
+                - TIPPICANOE_TAG=1.36.0
+                - MBTILESERVER_TAG=0.8.2
+                - GDAL_VERSION=3.2.2+dfsg-2+deb11u1
         container_name: qtrees-vectortiles-generator
         # in production this should have the following command
         command: --dir /tilesets --enable-fs-watch

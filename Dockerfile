@@ -1,7 +1,9 @@
 FROM golang:1.18.3-bullseye
-# RUN  apt-get update && \
-#   apt-get install -y \
-#   software-properties-common
+
+
+ARG TIPPICANOE_TAG=1.36.0
+ARG MBTILESERVER_TAG=0.8.2
+ARG GDAL_VERSION=3.2.2+dfsg-2+deb11u1
 
 RUN apt-get update && apt-get install -y \
   ca-certificates \
@@ -12,12 +14,12 @@ RUN apt-get update && apt-get install -y \
   build-essential \
   libsqlite3-dev \
   zlib1g-dev \
-  gdal-bin \
+  gdal-bin=${GDAL_VERSION}} \
   bash \
   g++
-RUN go install github.com/consbio/mbtileserver@v0.8.2
+RUN go install github.com/consbio/mbtileserver@v${MBTILESERVER_TAG}
 WORKDIR /usr/app
-RUN git clone --depth 1 --branch 1.36.0 https://github.com/mapbox/tippecanoe.git && \
+RUN git clone --depth 1 --branch ${TIPPICANOE_TAG} https://github.com/mapbox/tippecanoe.git && \
   cd tippecanoe && \
   make -j && \
   make install && \
@@ -25,4 +27,5 @@ RUN git clone --depth 1 --branch 1.36.0 https://github.com/mapbox/tippecanoe.git
   rm -rf tippecanoe
 COPY ogr2ogr.sql ogr2ogr.sql
 COPY entrypoint.sh entrypoint.sh
+EXPOSE 8000
 ENTRYPOINT [ "/usr/app/entrypoint.sh" ]
