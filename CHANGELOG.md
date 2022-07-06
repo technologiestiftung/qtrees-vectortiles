@@ -1,3 +1,21 @@
+# [1.1.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.0.0...v1.1.0) (2022-07-06)
+
+
+### Features
+
+* Create docker tag release based on semantic release ([85c68e2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/85c68e254a0d43fe0c3fd738c1c90917f86d1704))
+
+
+
+
+
+# [1.1.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.0.0...v1.1.0) (2022-07-06)
+
+
+### Features
+
+* Create docker tag release based on semantic release ([85c68e2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/85c68e254a0d43fe0c3fd738c1c90917f86d1704))
+
 # 1.0.0 (2022-07-06)
 
 
