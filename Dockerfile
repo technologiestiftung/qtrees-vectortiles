@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
   build-essential \
   libsqlite3-dev \
   zlib1g-dev \
-  gdal-bin=${GDAL_VERSION}} \
+  gdal-bin=${GDAL_VERSION} \
   bash \
   g++
 RUN go install github.com/consbio/mbtileserver@v${MBTILESERVER_TAG}
