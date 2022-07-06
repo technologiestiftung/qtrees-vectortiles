@@ -22,6 +22,12 @@ services:
       timeout: 5s
       retries: 5
   mbtileserver:
+    environment:
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGUSER=postgres
+      - PGPASSWORD=postgres
+    command: --dir /tilesets --enable-fs-watch
     depends_on:
       postgres:
         condition: service_healthy
