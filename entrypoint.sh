@@ -2,12 +2,13 @@
 set -e
 IFS=$'\n\t'
 
-echo "Running $0"
-rm -f /usr/app/out.full.geojson || true
-ogr2ogr -f GeoJSON /usr/app/out.full.geojson "PG:host='$PGHOST' dbname='$PGDATABASE' user='$PGUSER' password='$PGPASSWORD'" -sql "SELECT * from api.trees;"
-tippecanoe -zg -o /usr/app/trees.mbtiles --force --drop-densest-as-needed --extend-zooms-if-still-dropping /usr/app/out.full.geojson
-cp /usr/app/trees.mbtiles /tilesets
+WORKDIR=/usr/app
+TILESETDIR=/tilesets
 
-# tippecanoe --help
-# ogr2ogr --help-general
-mbtileserver --dir /tilesets --enable-fs-watch "$@"
+echo "Running $0"
+rm -f $WORKDIR/out.full.geojson || true
+ogr2ogr -f GeoJSON $WORKDIR/out.full.geojson "PG:host='$PGHOST' dbname='$PGDATABASE' user='$PGUSER' password='$PGPASSWORD'" -sql @$WORKDIR/ogr2ogr.sql
+tippecanoe -zg -o $WORKDIR/trees.mbtiles --force --drop-densest-as-needed --extend-zooms-if-still-dropping $WORKDIR/out.full.geojson
+cp $WORKDIR/trees.mbtiles $TILESETDIR
+
+mbtileserver --dir $TILESETDIR --enable-fs-watch "$@"

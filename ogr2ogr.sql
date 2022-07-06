@@ -1,0 +1,36 @@
+SELECT
+  trees.gml_id AS trees_gml_id,
+  trees."baumid" AS trees_baumid,
+  trees."standortnr" AS trees_standortnr,
+  trees."kennzeich" AS trees_kennzeich,
+  trees."namenr" AS trees_namenr,
+  trees."art_dtsch" AS trees_art_dtsch,
+  trees."art_bot" AS trees_art_bot,
+  trees."gattung_deutsch" AS trees_gattung_deutsch,
+  trees."gattung" AS trees_gattung,
+  trees."strname" AS trees_strname,
+  trees."hausnr" AS trees_hausnr,
+  trees."pflanzjahr" AS trees_pflanzjahr,
+  trees."standalter" AS trees_standalter,
+  trees."stammumfg" AS trees_stammumfg,
+  trees."baumhoehe" AS trees_baumhoehe,
+  trees."bezirk" AS trees_bezirk,
+  trees."eigentuemer" AS trees_eigentuemer,
+  trees."zusatz" AS trees_zusatz,
+  trees."kronedurch" AS trees_kronedurch,
+  trees."geometry" AS trees_geometry,
+  trees."lat" AS trees_lat,
+  trees."lng" AS trees_lng,
+  trees."created_at" AS trees_created_at,
+  trees."updated_at" AS trees_updated_at,
+  forecast."id" AS forecast_id,
+  forecast."baum_id" AS forecast_baum_id,
+  forecast."type_id" AS forecast_type_id,
+  forecast."timestamp" AS forecast_timestamp,
+  forecast."value" AS forecast_value,
+  forecast."created_at" AS forecast_created_at,
+  forecast."model_id" AS forecast_model_id
+FROM
+  api.trees
+  LEFT JOIN api.forecast ON trees.gml_id = forecast.baum_id;
+
