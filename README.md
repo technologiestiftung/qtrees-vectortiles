@@ -8,7 +8,7 @@
 
 # QTrees Vector Tiles Generator
 
-This project is a pipeline to generate vector tiles based on a PGSQL Database. It uses gdal, tippicanoe and mbtileserver to generate and serve vector tiles. It is a part of the QTrees.ai project.
+This project is a pipeline to generate vector tiles based on a PGSQL Database. It uses gdal, tippecanoe and mbtileserver to generate and serve vector tiles. It is a part of the QTrees.ai project.
 
 ## Prequisites
 
