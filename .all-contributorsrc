@@ -11,6 +11,19 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "ff6347",
+      "name": "Fabian Morón Zirfas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/315106?v=4",
+      "profile": "https://fabianmoronzirfas.me",
+      "contributions": [
+        "code",
+        "design",
+        "ideas",
+        "infra",
+        "test"
+      ]
+    },
+    {
       "login": "juan-carlos-tsb",
       "name": "juan-carlos-tsb",
       "avatar_url": "https://avatars.githubusercontent.com/u/91873654?v=4",
