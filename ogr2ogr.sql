@@ -32,5 +32,4 @@ SELECT
   forecast."model_id" AS forecast_model_id
 FROM
   api.trees
-  LEFT JOIN api.forecast ON trees.gml_id = forecast.baum_id;
-
+  LEFT JOIN api.forecast ON trees.gml_id = forecast.baum_id
