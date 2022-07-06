@@ -18,5 +18,18 @@
     "titleBar.inactiveBackground": "#97d1e099",
     "titleBar.inactiveForeground": "#15202b99"
   },
-  "peacock.color": "#97d1e0"
+  "peacock.color": "#97d1e0",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "local dev db qtrees",
+      "group": "qtrees",
+      "database": "postgres",
+      "username": "postgres",
+      "password": "postgres"
+    }
+  ]
 }
