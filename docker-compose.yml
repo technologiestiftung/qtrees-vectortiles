@@ -3,13 +3,13 @@ services:
     mbtileserver:
         environment:
             # these variables are used in the entrypoint.sh script
-            - TILESETDIR=/tilesets
-            - WORKDIR=/usr/app
+            - TILESET_DIR=/tilesets
+            - WORK_DIR=/usr/app
             # The values below need to be changed in production
-            # - PGHOST=postgres
-            # - PGDATABASE=postgres
-            # - PGUSER=postgres
-            # - PGPASSWORD=postgres
+            # - POSTGRES_HOST=postgres
+            # - POSTGRES_DB=postgres
+            # - POSTGRES_USER=postgres
+            # - POSTGRES_PASSWORD=postgres
             # or you use an .env file for this
             # env_file:
             #     - .env
