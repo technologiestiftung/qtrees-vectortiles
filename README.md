@@ -68,6 +68,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://fabianmoronzirfas.me"><img src="https://avatars.githubusercontent.com/u/315106?v=4?s=128" width="128px;" alt=""/><br /><sub><b>Fabian Morón Zirfas</b></sub></a><br /><a href="https://github.com/technologiestiftung/qtrees-vectortiles-generator/commits?author=ff6347" title="Code">💻</a> <a href="#design-ff6347" title="Design">🎨</a> <a href="#ideas-ff6347" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-ff6347" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/technologiestiftung/qtrees-vectortiles-generator/commits?author=ff6347" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://www.technologiestiftung-berlin.de/de/citylab/"><img src="https://avatars.githubusercontent.com/u/91873654?v=4?s=128" width="128px;" alt=""/><br /><sub><b>juan-carlos-tsb</b></sub></a><br /><a href="https://github.com/technologiestiftung/qtrees-vectortiles-generator/commits?author=juan-carlos-tsb" title="Code">💻</a> <a href="#design-juan-carlos-tsb" title="Design">🎨</a> <a href="https://github.com/technologiestiftung/qtrees-vectortiles-generator/pulls?q=is%3Apr+reviewed-by%3Ajuan-carlos-tsb" title="Reviewed Pull Requests">👀</a> <a href="#ideas-juan-carlos-tsb" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
