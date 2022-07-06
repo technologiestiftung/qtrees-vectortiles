@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgis/postgis:14-3.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  mbtileserver:
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    command: --dir /tilesets --enable-fs-watch
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./_data/tilesets:/tilesets
+  pgadmin:
+    image: dpage/pgadmin4:6.10
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@citylab-berlin.org
+      PGADMIN_DEFAULT_PASSWORD: 123456
+      PGADMIN_LISTEN_PORT: 8000
+    ports:
+      - "9999:8000"

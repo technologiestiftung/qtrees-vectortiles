@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+    mbtileserver:
+        environment:
+            # these variables are used in the entrypoint.sh script
+            - TILESET_DIR=/tilesets
+            - WORK_DIR=/usr/app
+            # The values below need to be changed in production
+            # - POSTGRES_HOST=postgres
+            # - POSTGRES_DB=postgres
+            # - POSTGRES_USER=postgres
+            # - POSTGRES_PASSWORD=postgres
+            # or you use an .env file for this
+            # env_file:
+            #     - .env
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - TIPPICANOE_TAG=1.36.0
+                - MBTILESERVER_TAG=0.8.2
+                - GDAL_VERSION=3.2.2+dfsg-2+deb11u1
+        container_name: qtrees-vectortiles-generator
+        # in production this should have the following command
+        command: --dir /tilesets --enable-fs-watch
+        restart: always
+        ports:
+            - 26080:8000
+        volumes:
+            - tilesets:/tilesets
+volumes:
+    tilesets:
