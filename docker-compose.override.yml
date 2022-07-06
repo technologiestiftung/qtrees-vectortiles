@@ -25,3 +25,14 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./_data/tilesets:/tilesets
+      # - ./_data/workdir:/usr/app
+  pgadmin:
+    image: dpage/pgadmin4:6.10
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@citylab-berlin.org
+      PGADMIN_DEFAULT_PASSWORD: 123456
+      PGADMIN_LISTEN_PORT: 8000
+    ports:
+      - "9999:8000"
