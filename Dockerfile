@@ -23,6 +23,6 @@ RUN git clone --depth 1 --branch 1.36.0 https://github.com/mapbox/tippecanoe.git
   make install && \
   cd .. && \
   rm -rf tippecanoe
-
+COPY ogr2ogr.sql ogr2ogr.sql
 COPY entrypoint.sh entrypoint.sh
 ENTRYPOINT [ "/usr/app/entrypoint.sh" ]
