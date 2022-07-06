@@ -1,3 +1,4 @@
 .env
 data/postgres
 _data/trees.mbtiles
+_data/tilesets/trees.mbtiles
