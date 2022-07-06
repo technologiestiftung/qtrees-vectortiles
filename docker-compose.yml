@@ -12,4 +12,6 @@ services:
         ports:
             - 26080:8000
         volumes:
-            - ./_data:/tilesets
+            - tilesets:/tilesets
+volumes:
+    tilesets:
