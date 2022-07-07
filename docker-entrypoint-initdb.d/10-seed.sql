@@ -4,6 +4,6 @@ INSERT INTO "api"."trees" ("gml_id", "baumid", "standortnr", "kennzeich", "namen
 INSERT INTO "api"."forecast_types" ("id", "name")
     VALUES (1, 'saugspannung_30cm'), (2, 'saugspannung_60cm'), (3, 'saugspannung_90cm'), (4, 'saugspannung_stamm');
 
-INSERT INTO "api"."forecast" ("id", "baum_id", "type_id", "timestamp", "value", "created_at", "model_id")
-    VALUES (1, 's_wfs_baumbestand_an.00008100:0022e7ba', 1, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), (1, 's_wfs_baumbestand_an.00008100:0022e7ba', 2, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), (1, 's_wfs_baumbestand_an.00008100:0022e7ba', 3, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), (1, 's_wfs_baumbestand_an.00008100:0022e7ba', 4, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1');
+INSERT INTO "api"."forecast" ("baum_id", "type_id", "timestamp", "value", "created_at", "model_id")
+    VALUES ('s_wfs_baumbestand_an.00008100:0022e7ba', 1, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), ('s_wfs_baumbestand_an.00008100:0022e7ba', 2, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), ('s_wfs_baumbestand_an.00008100:0022e7ba', 3, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), ('s_wfs_baumbestand_an.00008100:0022e7ba', 4, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1');
 
