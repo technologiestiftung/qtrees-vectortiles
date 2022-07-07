@@ -23,25 +23,38 @@ SELECT
   trees. "lng" AS trees_lng,
   trees. "created_at" AS trees_created_at,
   trees. "updated_at" AS trees_updated_at,
-  _nowcast. "id" AS nowcast_id,
   _nowcast. "baum_id" AS nowcast_baum_id,
-  _nowcast. "type_id" AS nowcast_type_id,
-  _nowcast. "timestamp" AS nowcast_timestamp,
-  _nowcast. "value" AS nowcast_value,
-  _nowcast. "created_at" AS nowcast_created_at,
-  _nowcast. "model_id" AS nowcast_model_id
+  _nowcast. "nowcast_types_id_array" AS nowcast_type_ids,
+  _nowcast. "nowcast_timestamp_array" AS nowcast_timestamps,
+  _nowcast. "nowcast_values_array" AS nowcast_values,
+  _nowcast. "nowcast_created_at_array" AS nowcast_created_ats,
+  _nowcast. "nowcast_model_id_array" AS nowcast_model_ids
 FROM
   api.trees
-  LEFT JOIN ( SELECT DISTINCT ON (n.baum_id)
-      n.baum_id,
-      n.id,
-      type_id,
-      "timestamp",
-      value,
-      created_at,
-      model_id
-    FROM
-      api.nowcast AS n
-    ORDER BY
-      n.baum_id,
-      "timestamp" DESC) AS _nowcast ON trees.gml_id = _nowcast.baum_id
+  LEFT JOIN (
+    SELECT
+      nowcast_baum_id AS baum_id,
+      ARRAY_AGG(DISTINCT distinct_nowcast.forcast_type ORDER BY distinct_nowcast.forcast_type) AS nowcast_types_array,
+      ARRAY_AGG(forecast_types_id) AS nowcast_types_id_array,
+      ARRAY_AGG(distinct_nowcast.nowcast_value) AS nowcast_values_array,
+      ARRAY_AGG(nowcast_created_at) AS nowcast_created_at_array,
+      ARRAY_AGG(nowcast_model_id) AS nowcast_model_id_array,
+      ARRAY_AGG(nowcast_timestamp) AS nowcast_timestamp_array
+    FROM ( SELECT DISTINCT ON (n.baum_id, f. "name")
+        n.id AS nowcast_id,
+        n. "timestamp" AS nowcast_timestamp,
+        n.baum_id AS nowcast_baum_id,
+        n. "value" AS nowcast_value,
+        n.created_at AS nowcast_created_at,
+        n.model_id AS nowcast_model_id,
+        f. "name" AS forcast_type,
+        f.id AS forecast_types_id
+      FROM
+        api.nowcast n
+        JOIN api.forecast_types f ON n.type_id = f.id
+      ORDER BY
+        n.baum_id,
+        f. "name",
+        n. "timestamp" DESC) distinct_nowcast
+    GROUP BY
+      nowcast_baum_id) AS _nowcast ON trees.gml_id = _nowcast.baum_id
