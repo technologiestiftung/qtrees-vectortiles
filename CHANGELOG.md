@@ -1,3 +1,35 @@
+# [1.2.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.1.0...v1.2.0) (2022-07-07)
+
+
+### Bug Fixes
+
+* ogr2ogr query ([a8c3ac5](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/a8c3ac506b636ba455a7dbe231b363441213bebc))
+
+
+### Features
+
+* **ogr2ogr query:** Make query agg nowcasts ([5fc2c9e](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/5fc2c9eaece78f3040e4fb09cc9e0dddb34627d2))
+* Set tmp dir and tileset dir via args ([7cce88a](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/7cce88adb7fc4af5e3eb7372bd79b13a008a7961))
+* Set tmp dir and tileset dir via args ([93ba1fb](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/93ba1fb690d85f68577a9dbec93a0ee994119c96))
+
+
+
+
+
+# [1.2.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.1.0...v1.2.0) (2022-07-07)
+
+
+### Bug Fixes
+
+* ogr2ogr query ([a8c3ac5](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/a8c3ac506b636ba455a7dbe231b363441213bebc))
+
+
+### Features
+
+* **ogr2ogr query:** Make query agg nowcasts ([5fc2c9e](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/5fc2c9eaece78f3040e4fb09cc9e0dddb34627d2))
+* Set tmp dir and tileset dir via args ([7cce88a](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/7cce88adb7fc4af5e3eb7372bd79b13a008a7961))
+* Set tmp dir and tileset dir via args ([93ba1fb](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/93ba1fb690d85f68577a9dbec93a0ee994119c96))
+
 # [1.1.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.0.0...v1.1.0) (2022-07-06)
 
 
