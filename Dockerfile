@@ -4,6 +4,12 @@ FROM golang:1.18.3-bullseye
 ARG TIPPICANOE_TAG=1.36.0
 ARG MBTILESERVER_TAG=0.8.2
 ARG GDAL_VERSION=3.2.2+dfsg-2+deb11u1
+ARG TILESET_DIR=/tileset
+ARG TMP_DIR=/tmp
+
+ENV WORK_DIR /usr/app
+ENV TILESET_DIR $TILESET_DIR
+ENV TMP_DIR $TMP_DIR
 
 RUN apt-get update && apt-get install -y \
   ca-certificates \
@@ -18,7 +24,7 @@ RUN apt-get update && apt-get install -y \
   bash \
   g++
 RUN go install github.com/consbio/mbtileserver@v${MBTILESERVER_TAG}
-WORKDIR /usr/app
+WORKDIR ${WORK_DIR}
 RUN git clone --depth 1 --branch ${TIPPICANOE_TAG} https://github.com/mapbox/tippecanoe.git && \
   cd tippecanoe && \
   make -j && \
