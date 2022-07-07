@@ -133,3 +133,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+_data/temp/out.full.geojson
+_data/temp/trees.mbtiles
