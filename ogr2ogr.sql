@@ -26,13 +26,9 @@ SELECT
   _nowcast. "baum_id" AS nowcast_baum_id,
   /*
   _nowcast. "nowcast_types_id_array" AS nowcast_type_ids, 
-
   _nowcast. "nowcast_timestamp_array" AS nowcast_timestamps,
-
   _nowcast. "nowcast_values_array" AS nowcast_values,
-
   _nowcast. "nowcast_created_at_array" AS nowcast_created_ats,
-
   _nowcast. "nowcast_model_id_array" AS nowcast_model_ids,
   */
   
@@ -70,18 +66,18 @@ FROM
       nowcast_baum_id AS baum_id,
       ARRAY_AGG(DISTINCT distinct_nowcast.forcast_type ORDER BY distinct_nowcast.forcast_type) AS nowcast_types_array,
 	  /*
-      ARRAY_AGG(forecast_types_id) AS nowcast_types_id_array,
-      ARRAY_AGG(distinct_nowcast.nowcast_value) AS nowcast_values_array,
+	  ARRAY_AGG(forecast_types_id) AS nowcast_types_id_array,
+	  ARRAY_AGG(distinct_nowcast.nowcast_value) AS nowcast_values_array,
 	  ARRAY_AGG(nowcast_created_at) AS nowcast_created_at_array,
-      ARRAY_AGG(nowcast_model_id) AS nowcast_model_id_array,
-      ARRAY_AGG(nowcast_timestamp) AS nowcast_timestamp_array
+	  ARRAY_AGG(nowcast_model_id) AS nowcast_model_id_array,
+	  ARRAY_AGG(nowcast_timestamp) AS nowcast_timestamp_array
 	  */
 	  (ARRAY_AGG(forecast_types_id)) [1] nowcast_type_1,
 	  (ARRAY_AGG(forecast_types_id)) [2] nowcast_type_2,
 	  (ARRAY_AGG(forecast_types_id)) [3] nowcast_type_3,
 	  (ARRAY_AGG(forecast_types_id)) [4] nowcast_type_4,
 	  
-      (ARRAY_AGG(distinct_nowcast.nowcast_value)) [1] nowcast_values_1,
+	  (ARRAY_AGG(distinct_nowcast.nowcast_value)) [1] nowcast_values_1,
 	  (ARRAY_AGG(distinct_nowcast.nowcast_value)) [2] nowcast_values_2,	  
 	  (ARRAY_AGG(distinct_nowcast.nowcast_value)) [3] nowcast_values_3,	  
 	  (ARRAY_AGG(distinct_nowcast.nowcast_value)) [4] nowcast_values_4,
@@ -118,4 +114,4 @@ FROM
         f. "name",
         n. "timestamp" DESC) distinct_nowcast
     GROUP BY
-      nowcast_baum_id) AS _nowcast ON trees.gml_id = _nowcast.baum_id LIMIT 100
+      nowcast_baum_id) AS _nowcast ON trees.gml_id = _nowcast.baum_id
