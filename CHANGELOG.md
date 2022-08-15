@@ -1,3 +1,33 @@
+# [2.0.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.2.0...v2.0.0) (2022-08-15)
+
+
+### Features
+
+* Split nowcast values ([1fdc600](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/1fdc600ddc064583259670acb0123f901d5aed9d))
+
+
+### BREAKING CHANGES
+
+* Not backwards compatible changes in tileset
+The nowcasts values are no longer arrays
+
+
+
+
+
+# [2.0.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.2.0...v2.0.0) (2022-08-15)
+
+
+### Features
+
+* Split nowcast values ([1fdc600](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/1fdc600ddc064583259670acb0123f901d5aed9d))
+
+
+### BREAKING CHANGES
+
+* Not backwards compatible changes in tileset
+The nowcasts values are no longer arrays
+
 # [1.2.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v1.1.0...v1.2.0) (2022-07-07)
 
 
