@@ -10,7 +10,7 @@
 
 This project is a pipeline to generate vector tiles based on a PGSQL Database. It uses gdal, tippecanoe and mbtileserver to generate and serve vector tiles. It is a part of the QTrees.ai project.
 
-## Prequisites
+## Prerequisites
 
 - Docker
 - Postgres DB (also included in docker-compose.override.yml)
@@ -24,7 +24,7 @@ docker compose up -d
 
 ## Tests
 
-Currently the tests only check if the images can be built and if the mbtileserver can be started.
+Currently the tests only check if the images can be built and if the `mbtileserver` can be started.
 
 ```bash
 cd path/to/repo
