@@ -1,0 +1,29 @@
+name: Daily Update
+on:
+  repository_dispatch:
+    types: [nightly-release]
+    # $ curl -v -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/[org-name-or-username]/[repository]/dispatches -d '{ "event_type": "semantic-release" }'
+
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_comit.message, 'skip ci')"
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 1
+      - name: Add note
+        run: echo "nightly-release-${{ steps.date.outputs.date }}" >> nightly-release.txt
+      - name: Commit nightly
+        uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+          add: "."
+          default_author: github_actor
+          message: "nightly: ${{ steps.date.outputs.date }}"
