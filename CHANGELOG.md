@@ -1,3 +1,11 @@
+## [2.0.7](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.0.6...v2.0.7) (2022-08-31)
+
+
+
+
+
+## [2.0.7](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.0.6...v2.0.7) (2022-08-31)
+
 ## [2.0.6](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.0.5...v2.0.6) (2022-08-30)
 
 
