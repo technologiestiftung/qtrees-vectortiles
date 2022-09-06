@@ -1,3 +1,21 @@
+## [2.1.4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.3...v2.1.4) (2022-09-06)
+
+
+### Bug Fixes
+
+* Remove v from tag ([25775e9](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/25775e96d3a2be85da852565d3dfb8a4176042f3))
+
+
+
+
+
+## [2.1.4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.3...v2.1.4) (2022-09-06)
+
+
+### Bug Fixes
+
+* Remove v from tag ([25775e9](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/25775e96d3a2be85da852565d3dfb8a4176042f3))
+
 ## [2.1.3](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.2...v2.1.3) (2022-09-06)
 
 
