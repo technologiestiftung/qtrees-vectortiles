@@ -59,7 +59,6 @@ jobs:
           echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       - name: "run Portainer webhook"
         run: |
-          TAG=echo ${{ steps.meta.outputs.tags }} | awk '{split($0,a,":"); print a[2]}'
           curl -X POST ${{ secrets.PORTAINER_WEBHOOK_URL }}?${{ steps.current_tag.outputs.tag}}
   build-and-push-ghcr:
     env:
