@@ -1,3 +1,21 @@
+## [2.1.5](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.4...v2.1.5) (2022-09-06)
+
+
+### Bug Fixes
+
+* url query needs a name ([ca3e371](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/ca3e37102a3bc0b0946ac94e1d16208c986cc5fb))
+
+
+
+
+
+## [2.1.5](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.4...v2.1.5) (2022-09-06)
+
+
+### Bug Fixes
+
+* url query needs a name ([ca3e371](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/ca3e37102a3bc0b0946ac94e1d16208c986cc5fb))
+
 ## [2.1.4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.3...v2.1.4) (2022-09-06)
 
 
