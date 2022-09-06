@@ -1,3 +1,21 @@
+## [2.1.3](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.2...v2.1.3) (2022-09-06)
+
+
+### Bug Fixes
+
+* Remove var line from hook script ([e1e973d](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/e1e973dc0f1373887e1c8566b77682d2293287f2))
+
+
+
+
+
+## [2.1.3](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.2...v2.1.3) (2022-09-06)
+
+
+### Bug Fixes
+
+* Remove var line from hook script ([e1e973d](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/e1e973dc0f1373887e1c8566b77682d2293287f2))
+
 ## [2.1.2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.1...v2.1.2) (2022-09-06)
 
 
