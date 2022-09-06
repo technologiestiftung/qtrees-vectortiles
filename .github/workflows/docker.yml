@@ -53,13 +53,17 @@ jobs:
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Set current tag
-        id: current_tag
-        run: |
-          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Set Versions
+        uses: actions/github-script@v6
+        id: set_version
+        with:
+          script: |
+            const tag = context.ref.substring(10)
+            const no_v = tag.replace('v', '')
+            core.setOutput('no-v', no_v)
       - name: "run Portainer webhook"
         run: |
-          curl -X POST ${{ secrets.PORTAINER_WEBHOOK_URL }}?${{ steps.current_tag.outputs.tag}}
+          curl -X POST ${{ secrets.PORTAINER_WEBHOOK_URL }}?${{ steps.set_version.outputs.no-v}}
   build-and-push-ghcr:
     env:
       REGISTRY: ghcr.io
