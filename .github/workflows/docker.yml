@@ -53,6 +53,9 @@ jobs:
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: "Portainer webhook"
+        run: |
+          curl -X POST ${{ secrets.PORTAINER_WEBHOOK_URL }}?${{ steps.meta.outputs.tags }}
   build-and-push-ghcr:
     env:
       REGISTRY: ghcr.io
