@@ -1,3 +1,21 @@
+## [2.1.1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.0...v2.1.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* Set tag as variable ([7453c28](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/7453c283b2c02236c8f8847ad5495fb5a8490a06))
+
+
+
+
+
+## [2.1.1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.0...v2.1.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* Set tag as variable ([7453c28](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/7453c283b2c02236c8f8847ad5495fb5a8490a06))
+
 # [2.1.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.0.13...v2.1.0) (2022-09-06)
 
 
