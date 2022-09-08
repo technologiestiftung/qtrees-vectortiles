@@ -12,3 +12,4 @@ nightly-release-2022-09-04
 nightly-release-2022-09-05
 nightly-release-2022-09-06
 test container webhooknightly-release-2022-09-07
+nightly-release-2022-09-08
