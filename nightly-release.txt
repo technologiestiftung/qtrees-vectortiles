@@ -27,3 +27,4 @@ nightly-release-2022-09-20
 nightly-release-2022-09-21
 nightly-release-2022-09-22
 nightly-release-2022-09-23
+nightly-release-2022-09-24
