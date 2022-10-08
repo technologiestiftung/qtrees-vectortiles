@@ -40,3 +40,4 @@ nightly-release-2022-10-04
 nightly-release-2022-10-05
 nightly-release-2022-10-06
 nightly-release-2022-10-07
+nightly-release-2022-10-08
