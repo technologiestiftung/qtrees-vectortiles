@@ -89,3 +89,4 @@ nightly-release-2022-11-22
 nightly-release-2022-11-23
 nightly-release-2022-11-24
 nightly-release-2022-11-25
+nightly-release-2022-11-26
