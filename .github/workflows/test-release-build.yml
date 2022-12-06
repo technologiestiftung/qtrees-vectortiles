@@ -105,7 +105,7 @@ jobs:
           context: .
           file: ./Dockerfile
           build-args: |
-            BASE_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-base:${{ steps.meta_base.outputs.tags }}
+            BASE_IMAGE=${{ env.IMAGE_NAME }}-base:${{ steps.meta_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.meta.outputs.tags }}
