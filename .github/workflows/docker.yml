@@ -16,12 +16,22 @@ on:
         default: false
 
 jobs:
-  build-and-push-docker-hub:
+  build-and-push-base-docker-hub:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v3
+      - name: Docker meta base
+        id: meta_base
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.IMAGE_NAME }}-base
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
@@ -45,10 +55,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build
+
+      - name: Build base image
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: ./Dockerfile.base
+          push: ${{ github.event_name != 'pull_request' }}
+          # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
+          tags: ${{ steps.meta_base.outputs.tags }}
+          labels: ${{ steps.meta_base.outputs.labels }}
+      - name: Build server image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: |
+            BASE_IMAGE=${{ env.IMAGE_NAME }}-base:${{ steps.meta_base.outputs.tags }}
+          file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.meta.outputs.tags }}
@@ -89,7 +112,16 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Extract metadata (tags, labels) for Docker base
+        id: metaghcr_base
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-base
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
       - name: Extract metadata (tags, labels) for Docker
         id: metaghcr
         uses: docker/metadata-action@v4
@@ -104,6 +136,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: ./Dockerfile
+          build-args: |
+            BASE_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-base:${{ steps.metaghcr_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.metaghcr.outputs.tags }}
