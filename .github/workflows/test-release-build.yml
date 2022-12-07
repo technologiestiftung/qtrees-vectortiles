@@ -5,6 +5,8 @@ name: Docker CI
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+
+  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
 on:
   push:
     branches: [main]
@@ -90,7 +92,20 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - uses: dorny/paths-filter@v2
+        id: base_changes
+        with:
+          filters: |
+            dockerfile:
+              - 'Dockerfile.base'
+      - name: set BASE_IMAGE on change
+        if: steps.base_changes.outputs.dockerfile == 'true'
+        run: echo "BASE_IMAGE=${{ steps.meta_base.outputs.tags }}" >> $GITHUB_ENV
+      - name: set BASE_IMAGE if not changed
+        if: steps.base_changes.outputs.dockerfile == 'false'
+        run: echo "BASE_IMAGE=$DEFAULT_BASE_IMAGE" >> $GITHUB_ENV
       - name: Build base
+        if: steps.base_changes.outputs.dockerfile == 'true'
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -104,8 +119,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          build-args: |
-            BASE_IMAGE=${{ steps.meta_base.outputs.tags }}
+          # build-args: |
+          # BASE_IMAGE=${{ steps.meta_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.meta.outputs.tags }}
@@ -157,7 +172,20 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-      - name: Build and push Docker image
+      - uses: dorny/paths-filter@v2
+        id: base_changes
+        with:
+          filters: |
+            dockerfile:
+              - 'Dockerfile.base'
+      - name: set BASE_IMAGE on change
+        if: steps.base_changes.outputs.dockerfile == 'true'
+        run: echo "BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}" >> $GITHUB_ENV
+      - name: set BASE_IMAGE if not changed
+        if: steps.base_changes.outputs.dockerfile == 'false'
+        run: echo "BASE_IMAGE=$REGISTRY/$DEFAULT_BASE_IMAGE" >> $GITHUB_ENV
+      - name: Build base and push Docker image
+        if: steps.base_changes.outputs.dockerfile == 'true'
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -171,8 +199,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          build-args: |
-            BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}
+          # build-args: |
+          # BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
           # platforms: "linux/amd64,linux/arm64,linux/arm/v7"
           tags: ${{ steps.metaghcr.outputs.tags }}
