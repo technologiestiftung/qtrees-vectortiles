@@ -126,20 +126,20 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Set Versions
-        uses: actions/github-script@v6
-        # run this action only if it was triggered by a release published
-        if: github.event_name == 'release' && github.event.action == 'published'
-        id: set_version
-        with:
-          script: |
-            const tag = context.ref.substring(10)
-            const no_v = tag.replace('v', '')
-            core.setOutput('no-v', no_v)
-      - name: "run Portainer webhook"
+      # - name: Set Versions
+      #   uses: actions/github-script@v6
+      #   # run this action only if it was triggered by a release published
+      #   if: github.event_name == 'release' && github.event.action == 'published'
+      #   id: set_version
+      #   with:
+      #     script: |
+      #       const tag = context.ref.substring(10)
+      #       const no_v = tag.replace('v', '')
+      #       core.setOutput('no-v', no_v)
+      - name: "run render webhook"
         if: github.event_name == 'release' && github.event.action == 'published'
         run: |
-          curl -X POST ${{ secrets.PORTAINER_WEBHOOK_URL }}?tag=${{ steps.set_version.outputs.no-v}}
+          curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
 
   build-and-push-ghcr:
     env:

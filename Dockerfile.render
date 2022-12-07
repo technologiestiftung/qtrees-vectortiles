@@ -1,0 +1,2 @@
+ARG IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.3
+FROM $IMAGE

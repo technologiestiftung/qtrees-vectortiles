@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: qtrees-vectortiles
+    env: docker
+    plan: starter
+    region: frankfurt
+    autodeploy: false
+    dockerContext: .
+    dockerfile: Dockerfile.render
+    envVars:
+      - key: POSTGRES_HOST
+        generateValue: false
+      - key: POSTGRES_DB
+        generateValue: false
+      - key: POSTGRES_USER
+        generateValue: false
+      - key: POSTGRES_PASSWORD
+        generateValue: false
