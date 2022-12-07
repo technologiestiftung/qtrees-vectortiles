@@ -9,10 +9,10 @@ services:
     dockerfilePath: Dockerfile.render
     envVars:
       - key: POSTGRES_HOST
-        generateValue: false
+        sync: false
       - key: POSTGRES_DB
-        generateValue: false
+        sync: false
       - key: POSTGRES_USER
-        generateValue: false
+        sync: false
       - key: POSTGRES_PASSWORD
-        generateValue: false
+        sync: false
