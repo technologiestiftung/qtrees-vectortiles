@@ -1,3 +1,31 @@
+# [2.3.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.2.0...v2.3.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* Run webhook only on release published ([0eea92b](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/0eea92bf051d87fa250b81db858a039253e4348d))
+
+
+### Features
+
+* **webhook:** Add webhook to trigger portainer ([63277fc](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/63277fc950cc22a725c7747ac68c64d2bb7160f7))
+
+
+
+
+
+# [2.3.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.2.0...v2.3.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* Run webhook only on release published ([0eea92b](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/0eea92bf051d87fa250b81db858a039253e4348d))
+
+
+### Features
+
+* **webhook:** Add webhook to trigger portainer ([63277fc](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/63277fc950cc22a725c7747ac68c64d2bb7160f7))
+
 # [2.2.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.25...v2.2.0) (2022-12-07)
 
 
