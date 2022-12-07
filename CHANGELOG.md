@@ -1,3 +1,39 @@
+# [2.2.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.25...v2.2.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* arguments on build command where missing ([1e4e778](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/1e4e77892f5a6478cea387b1e700bdcdc004e1c7))
+* **ghcr docker:** Fix tag name  creation ([c24f9b4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/c24f9b45024d6148ccbcc6c47992203061d2c7e1))
+* Pin  python3-gdal version ([caf5e3e](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/caf5e3e70348b921fb9deafd23b24fa42cfcd4b4))
+* Remove registry from docker hub build ([2648f44](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/2648f44e2a47e3262850f566adcae876c84d11d5))
+
+
+### Features
+
+* Add base image to speed up buils ([486c0ae](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/486c0aec4b87dde4a2c2526a18cea13bdf0978dd))
+* Make server image use base image ([91aca61](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/91aca6110b1c570d3b20c1a9250986dae7b8b503))
+
+
+
+
+
+# [2.2.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.25...v2.2.0) (2022-12-07)
+
+
+### Bug Fixes
+
+* arguments on build command where missing ([1e4e778](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/1e4e77892f5a6478cea387b1e700bdcdc004e1c7))
+* **ghcr docker:** Fix tag name  creation ([c24f9b4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/c24f9b45024d6148ccbcc6c47992203061d2c7e1))
+* Pin  python3-gdal version ([caf5e3e](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/caf5e3e70348b921fb9deafd23b24fa42cfcd4b4))
+* Remove registry from docker hub build ([2648f44](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/2648f44e2a47e3262850f566adcae876c84d11d5))
+
+
+### Features
+
+* Add base image to speed up buils ([486c0ae](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/486c0aec4b87dde4a2c2526a18cea13bdf0978dd))
+* Make server image use base image ([91aca61](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/91aca6110b1c570d3b20c1a9250986dae7b8b503))
+
 ## [2.1.25](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.1.24...v2.1.25) (2022-09-27)
 
 
