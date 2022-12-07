@@ -4,9 +4,9 @@ services:
     env: docker
     plan: starter
     region: frankfurt
-    autodeploy: false
+    autoDeploy: false
     dockerContext: .
-    dockerfile: Dockerfile.render
+    dockerfilePath: Dockerfile.render
     envVars:
       - key: POSTGRES_HOST
         generateValue: false
