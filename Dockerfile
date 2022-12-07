@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=golang:1.18.3-bullseye
+ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
 FROM $BASE_IMAGE
 
 ENV POSTGRES_HOST postgres
