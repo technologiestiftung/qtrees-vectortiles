@@ -6,7 +6,7 @@ services:
     region: frankfurt
     autoDeploy: false
     dockerContext: .
-    dockerfilePath: Dockerfile.render
+    dockerfilePath: Dockerfile
     envVars:
       - key: POSTGRES_HOST
         sync: false
