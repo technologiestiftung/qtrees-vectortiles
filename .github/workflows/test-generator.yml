@@ -1,29 +1,40 @@
 name: Test Generator
 on:
-  workflow_dispatch: {}
+    workflow_dispatch: {}
 
 jobs:
-  generator:
-    runs-on: ubuntu-latest
-    name: A job to generate the tileset
-    steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v3
-      - name: Generator
-        id: generator
-        uses: ./
-        with:
-          postgres_host: ${{ secrets.POSTGRES_HOST }}
-          postgres_db: ${{ secrets.POSTGRES_DB }}
-          postgres_user: ${{ secrets.POSTGRES_USER }}
-          postgres_password: ${{ secrets.POSTGRES_PASSWORD }}
-      - name: Get the output path
-        run: echo "The path of the tileset is ${{ steps.generator.outputs.tileset_path }}"
+    generator:
+        name: A job to generate the tileset
+        runs-on: ubuntu-latest
+        container:
+            image: technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
+            credentials:
+                username: ${{ secrets.DOCKER_USERNAME }}
+                password: ${{ secrets.DOCKER_PASSWORD }}
+            env:
+                POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+                POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+                POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+                POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+                POSTGRES_PORT: '5432'
+                TILESET_DIR: /tilesets
+                TILESET_NAME: trees.mbtiles
+                TMP_DIR: /tmp
+            volumes:
+                - ${{ github.workspace }}:/tilesets
+        steps:
+            - name: Checkout source repository
+              uses: actions/checkout@v3
+            - name: Run the generator
+              id: generator
+              run: |
+                  echo "Running the generator"
+                  ./generator.sh
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: tileset
-          path: ${{ steps.generator.outputs.tileset_path }}"
-        # now notify the render to use the new tileset
-        # by downloading it and restarting the server
+            - name: Upload artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: tileset
+                  path: ${{ steps.generator.outputs.tileset_path }}"
+              # now notify the render to use the new tileset
+              # by downloading it and restarting the server
