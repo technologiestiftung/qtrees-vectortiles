@@ -1,0 +1,29 @@
+on:
+  workflow_dispatch: {}
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    name: A job to generate the tileset
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Generator
+        id: generator
+        uses: ./
+        with:
+          postgres_host: ${{ secrets.POSTGRES_HOST }}
+          postgres_port: ${{ secrets.POSTGRES_PORT }}
+          postgres_user: ${{ secrets.POSTGRES_USER }}
+          postgres_password: ${{ secrets.POSTGRES_PASSWORD }}
+          postgres_database: ${{ secrets.POSTGRES_DATABASE }}
+      - name: Get the output path
+        run: echo "The path of the tileset is ${{ steps.generator.outputs.tileset_path }}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: tileset
+          path: ${{ steps.generator.outputs.tileset_path }}"
+        # now notify the render to use the new tileset
+        # by downloading it and restarting the server
