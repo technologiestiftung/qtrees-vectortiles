@@ -5,6 +5,7 @@ services:
             # these variables are used in the entrypoint.sh script
             - TILESET_DIR=/tilesets
             - TMP_DIR=/temp
+            - GITHUB_TOKEN=${GITHUB_TOKEN}
             # The values below need to be changed in production
             # - POSTGRES_HOST=postgres
             # - POSTGRES_DB=postgres
