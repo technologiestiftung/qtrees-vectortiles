@@ -1,5 +1,4 @@
-ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
-FROM $BASE_IMAGE
+FROM technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
 
 # ENV POSTGRES_HOST postgres
 # ENV POSTGRES_DB postgres
