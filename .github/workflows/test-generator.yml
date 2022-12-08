@@ -23,6 +23,8 @@ jobs:
             volumes:
                 - /tilesets:/tilesets
         steps:
+            - name: Create tilesetdir
+              run: mkdir -p $TILESET_DIR
             - name: Checkout source repository
               uses: actions/checkout@v3
             - name: Run the generator
@@ -39,5 +41,13 @@ jobs:
               with:
                   name: tileset
                   path: ${{ steps.generator.outputs.tileset_path }}"
+              # add tmate action to debug
+            - name: Setup tmate session
+              if: ${{ failure() }}
+              uses: mxschmitt/action-tmate@v3
+              # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+              timeout-minutes: 3
+              with:
+                  limit-access-to-actor: true
               # now notify the render to use the new tileset
               # by downloading it and restarting the server
