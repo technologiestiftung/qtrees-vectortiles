@@ -1,3 +1,25 @@
+## [2.3.2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.1...v2.3.2) (2022-12-08)
+
+
+### Bug Fixes
+
+* Errors in Dockerfile.render [skip ci] ([81dba52](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/81dba52868beadbc8c000127d1f18f0bd1b8d854))
+* Errors in render.yaml [skip ci] ([17d9d59](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/17d9d59ab6da30fcdda2c869f3541fd62b4959bb))
+* Errors in render.yaml [skip ci] ([19e695c](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/19e695cee27a2fcc11b16f31440ff41eade3f2aa))
+
+
+
+
+
+## [2.3.2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.1...v2.3.2) (2022-12-08)
+
+
+### Bug Fixes
+
+* Errors in Dockerfile.render [skip ci] ([81dba52](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/81dba52868beadbc8c000127d1f18f0bd1b8d854))
+* Errors in render.yaml [skip ci] ([17d9d59](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/17d9d59ab6da30fcdda2c869f3541fd62b4959bb))
+* Errors in render.yaml [skip ci] ([19e695c](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/19e695cee27a2fcc11b16f31440ff41eade3f2aa))
+
 ## [2.3.1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.0...v2.3.1) (2022-12-07)
 
 
