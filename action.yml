@@ -35,9 +35,9 @@ inputs:
     required: true
     default: "/tmp"
 
-  outputs:
-    tileset_path:
-      description: "the path of the newly created tileset"
-  runs:
-    using: "docker"
-    image: "Dockerfile.generator"
+outputs:
+  tileset_path:
+    description: "the path of the newly created tileset"
+runs:
+  using: "docker"
+  image: "Dockerfile.generator"
