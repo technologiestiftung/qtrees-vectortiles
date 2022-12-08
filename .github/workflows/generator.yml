@@ -1,5 +1,7 @@
-name: Test Generator
+name: Tileset Generator
 on:
+    repository_dispatch:
+        types: [nightly-release]
     workflow_dispatch: {}
 
 jobs:
@@ -43,12 +45,12 @@ jobs:
                   path: trees.mbtiles
                   if-no-files-found: error
               # add tmate action to debug
-            - name: Setup tmate session
-              if: ${{ failure() }}
-              uses: mxschmitt/action-tmate@v3
-              # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
-              timeout-minutes: 3
-              with:
-                  limit-access-to-actor: true
-              # now notify the render to use the new tileset
-              # by downloading it and restarting the server
+            # - name: Setup tmate session
+            #   if: ${{ failure() }}
+            #   uses: mxschmitt/action-tmate@v3
+            #   # if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+            #   timeout-minutes: 3
+            #   with:
+            #       limit-access-to-actor: true
+            #   # now notify the render to use the new tileset
+            #   # by downloading it and restarting the server
