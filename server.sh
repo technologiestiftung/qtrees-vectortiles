@@ -9,7 +9,7 @@ mkdir -p "$TILESET_DIR"
 # download artifact from github actions and copy to $TILESET_DIR
 echo "system: filtering build artifacts for tileset..."
 # save output of command in variable
-TILESET_URL=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/technologiestiftung/qtrees-vectortiles-generator/actions/artifacts | jq '.artifacts[] | select(.name == "tileset") | .archive_download_url')
+TILESET_URL=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/technologiestiftung/qtrees-vectortiles-generator/actions/artifacts | jq -r '.artifacts[] | select(.name == "tileset") | .archive_download_url')
 echo "system: found the following url... $TILESET_URL"
 # download via curl from  $TILESET_URL and unzip to $TILESET_DIR
 echo "system: downloading tileset to tileset directory... $TILESET_DIR"
