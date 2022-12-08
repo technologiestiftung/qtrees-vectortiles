@@ -41,6 +41,7 @@ jobs:
               with:
                   name: tileset
                   path: ${{ steps.generator.outputs.tileset_path }}"
+                  if-no-files-found: error
               # add tmate action to debug
             - name: Setup tmate session
               if: ${{ failure() }}
