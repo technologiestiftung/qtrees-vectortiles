@@ -14,10 +14,9 @@ jobs:
         uses: ./
         with:
           postgres_host: ${{ secrets.POSTGRES_HOST }}
-          postgres_port: ${{ secrets.POSTGRES_PORT }}
+          postgres_db: ${{ secrets.POSTGRES_DB }}
           postgres_user: ${{ secrets.POSTGRES_USER }}
           postgres_password: ${{ secrets.POSTGRES_PASSWORD }}
-          postgres_database: ${{ secrets.POSTGRES_DATABASE }}
       - name: Get the output path
         run: echo "The path of the tileset is ${{ steps.generator.outputs.tileset_path }}"
 
