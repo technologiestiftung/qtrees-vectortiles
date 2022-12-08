@@ -21,7 +21,7 @@ jobs:
                 TILESET_NAME: trees.mbtiles
                 TMP_DIR: /tmp
             volumes:
-                - tilesets:/tilesets
+                - /tilesets:/tilesets
         steps:
             - name: Checkout source repository
               uses: actions/checkout@v3
