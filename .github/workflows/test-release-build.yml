@@ -136,10 +136,10 @@ jobs:
       #       const tag = context.ref.substring(10)
       #       const no_v = tag.replace('v', '')
       #       core.setOutput('no-v', no_v)
-      - name: "run render webhook"
-        if: github.event_name == 'release' && github.event.action == 'published'
-        run: |
-          curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
+      # - name: "run render webhook"
+      #   if: github.event_name == 'release' && github.event.action == 'published'
+      #   run: |
+      #     curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
 
   build-and-push-ghcr:
     env:
