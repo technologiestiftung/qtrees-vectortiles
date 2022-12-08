@@ -102,3 +102,4 @@ nightly-release-2022-12-05
 nightly-release-2022-12-06
 nightly-release-2022-12-07
 nightly-release-2022-12-07
+nightly-release-2022-12-08
