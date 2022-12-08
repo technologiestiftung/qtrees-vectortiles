@@ -21,7 +21,7 @@ jobs:
                 TILESET_NAME: trees.mbtiles
                 TMP_DIR: /tmp
             volumes:
-                - ${{ github.workspace }}:/tilesets
+                - tilesets:/tilesets
         steps:
             - name: Checkout source repository
               uses: actions/checkout@v3
@@ -31,6 +31,9 @@ jobs:
                   echo "Running the generator"
                   ./generator.sh
 
+            - name: Output path
+              run: |
+                  echo "The path of the generated tileset is ${{ steps.generator.outputs.tileset_path }}"
             - name: Upload artifact
               uses: actions/upload-artifact@v2
               with:

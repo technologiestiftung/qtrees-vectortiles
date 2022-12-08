@@ -17,7 +17,7 @@ ogr2ogr \
   dbname='$POSTGRES_DB' \
   user='$POSTGRES_USER' \
   password='$POSTGRES_PASSWORD'" \
-  -sql @"$GITHUB_WORKSPACE"/ogr2ogr.sql
+  -sql @"$GITHUB_WORKSPACE"/ogr2ogr-test.sql
 
 echo "tippecanoe: Creating tileset..."
 tippecanoe \
@@ -29,5 +29,5 @@ tippecanoe \
   "$TMP_DIR"/out.full.geojson
 
 echo "system: Copying tileset to workdir directory..."
-cp "$TMP_DIR"/"$TILESET_NAME" "$GITHUB_WORKSPACE"
-echo "tileset_path=$GITHUB_WORKSPACE/$TILESET_NAME" >>"$GITHUB_OUTPUT"
+cp "$TMP_DIR"/"$TILESET_NAME" "$TILESET_DIR"
+echo "tileset_path=$TILESET_DIR/$TILESET_NAME" >>"$GITHUB_OUTPUT"
