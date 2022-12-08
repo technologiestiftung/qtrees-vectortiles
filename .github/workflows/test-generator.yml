@@ -20,8 +20,8 @@ jobs:
                 TILESET_DIR: /tilesets
                 TILESET_NAME: trees.mbtiles
                 TMP_DIR: /tmp
-            volumes:
-                - /tilesets:/tilesets
+            # volumes:
+            #     - /tilesets:/tilesets
         steps:
             - name: Create tilesetdir
               run: mkdir -p $TILESET_DIR
@@ -40,7 +40,7 @@ jobs:
               uses: actions/upload-artifact@v2
               with:
                   name: tileset
-                  path: ${{ steps.generator.outputs.tileset_path }}"
+                  path: trees.mbtiles
                   if-no-files-found: error
               # add tmate action to debug
             - name: Setup tmate session
