@@ -1,43 +1,43 @@
-name: "Qtrees Vectortile Generator"
-description: "Generate vectortiles from a postgres database"
-author: "Fabian Morón Zirfas"
+name: 'Qtrees Vectortile Generator'
+description: 'Generate vectortiles from a postgres database'
+author: 'Fabian Morón Zirfas'
 inputs:
-  postgres_host:
-    description: "Postgres host"
-    required: true
-    default: "localhost"
-  postgres_db:
-    description: "Postgres database"
-    required: true
-    default: "postgres"
-  postgres_user:
-    description: "Postgres user name"
-    required: true
-    default: "postgres"
-  postgres_password:
-    description: "Postgres password"
-    required: true
-    default: "postgres"
-  postgres_port:
-    description: "Postgres port"
-    required: true
-    default: "5432"
-  tileset_dir:
-    description: "The directory where the tileset will be created"
-    required: true
-    default: "/tileset"
-  tileset_name:
-    description: "The name of the tileset"
-    required: true
-    default: "trees.mbtiles"
-  tmp_dir:
-    description: "The directory where the temporary files will be created"
-    required: true
-    default: "/tmp"
+    postgres_host:
+        description: 'Postgres host'
+        required: true
+        default: 'localhost'
+    postgres_db:
+        description: 'Postgres database'
+        required: true
+        default: 'postgres'
+    postgres_user:
+        description: 'Postgres user name'
+        required: true
+        default: 'postgres'
+    postgres_password:
+        description: 'Postgres password'
+        required: true
+        default: 'postgres'
+    postgres_port:
+        description: 'Postgres port'
+        required: true
+        default: '5432'
+    tileset_dir:
+        description: 'The directory where the tileset will be created'
+        required: true
+        default: '/tileset'
+    tileset_name:
+        description: 'The name of the tileset'
+        required: true
+        default: 'trees.mbtiles'
+    tmp_dir:
+        description: 'The directory where the temporary files will be created'
+        required: true
+        default: '/tmp'
 
 outputs:
-  tileset_path:
-    description: "the path of the newly created tileset"
+    tileset_path:
+        description: 'the path of the newly created tileset'
 runs:
-  using: "docker"
-  image: "Dockerfile.generator"
+    using: 'docker'
+    image: 'Dockerfile.generator'
