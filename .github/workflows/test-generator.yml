@@ -1,3 +1,4 @@
+name: Test Generator
 on:
   workflow_dispatch: {}
 
