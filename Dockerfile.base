@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
   openssl \
   curl \
   jq \
+  zip \
+  unzip \
   make \
   git \
   build-essential \
