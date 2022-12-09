@@ -98,8 +98,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: set BASE_IMAGE
-        run: echo "BASE_IMAGE=${{ steps.meta_base.outputs.tags }}" >> $GITHUB_ENV
+      # - name: set BASE_IMAGE
+      #   run: echo "BASE_IMAGE=${{ steps.meta_base.outputs.tags }}" >> $GITHUB_ENV
 
       - name: Build base
         uses: docker/build-push-action@v3
@@ -162,8 +162,8 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
 
-      - name: set BASE_IMAGE
-        run: echo "BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}" >> $GITHUB_ENV
+      # - name: set BASE_IMAGE
+      #   run: echo "BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}" >> $GITHUB_ENV
 
       - name: Build base and push Docker image
         uses: docker/build-push-action@v3
