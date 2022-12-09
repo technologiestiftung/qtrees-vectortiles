@@ -10,12 +10,22 @@
 
 This project is a pipeline to generate vector tiles based on a PGSQL Database. It uses gdal, tippecanoe and mbtileserver to generate and serve vector tiles. It is a part of the QTrees.ai project.
 
+The pipeline consits of three parts. The
+
+1. The base image [Dockerfile.base](./Dockerfile.base) installs all the dependencies and tools needed to generate the vector tiles and serve them
+2. The generator.sh step in a GitHub Action [generate.yml](./.github/workflows/generate.yml) generates the vector tiles and pushes them to a S3 bucket (uses the base image)
+3. The tileserver hosted on render.com. [Dockerfile](./Dockerfile) builds a docker image that downloads the generated .pbf from AWS S3 and serves the vector tiles (uses the base image)
+
 ## Prerequisites
 
 - Docker
 - Postgres DB (also included in docker-compose.override.yml)
+- render.com Account
+- AWS S3 Bucket
 
 ## Usage and Development
+
+Local development is hard when trying to build ci pipelines. Happens mostly in the cloud on GitHub Actions. You could try [nektos/act](https://github.com/nektos/act) to run this locally.
 
 ```bash
 cd path/to/repo

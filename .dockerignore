@@ -2,6 +2,16 @@ README.md
 readme.md
 docker-compose*.yml
 .gitignore
-Dockerfile
+Dockerfile*
 .env
 .vscode
+.nvmrc
+.github
+.all-contributorsrc
+CHANGELOG.md
+LICENSE
+nightly-release.txt
+package*.json
+prettier.config.cjs
+render.yaml
+release.config.*js
