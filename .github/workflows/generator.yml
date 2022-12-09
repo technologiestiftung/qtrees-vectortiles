@@ -9,7 +9,7 @@ jobs:
     name: A job to generate the tileset
     runs-on: ubuntu-latest
     container:
-      image: technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
+      image: technologiestiftung/qtrees-vectortiles-generator-base:main
       credentials:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
