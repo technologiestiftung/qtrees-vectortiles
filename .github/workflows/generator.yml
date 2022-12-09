@@ -6,7 +6,7 @@ on:
 
 jobs:
   generator:
-    name: A job to generate the tileset
+    name: Generate the tileset
     runs-on: ubuntu-latest
     container:
       image: technologiestiftung/qtrees-vectortiles-generator-base:main
