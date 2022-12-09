@@ -17,7 +17,7 @@ ogr2ogr \
   dbname='$POSTGRES_DB' \
   user='$POSTGRES_USER' \
   password='$POSTGRES_PASSWORD'" \
-  -sql @"$GITHUB_WORKSPACE"/ogr2ogr-test.sql
+  -sql @"$GITHUB_WORKSPACE"/ogr2ogr.sql
 
 echo "tippecanoe: Creating tileset..."
 tippecanoe \
