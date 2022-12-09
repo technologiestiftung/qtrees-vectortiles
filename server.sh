@@ -5,7 +5,7 @@ IFS=$'\n\t'
 echo "system: Running $0"
 echo "system: Creating tileset directory...$TILESET_DIR"
 mkdir -p "$TILESET_DIR"
-export TILESET_NAME="trees.mbtiles"
+export TILESET_NAME=$TILESET_NAME
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 export AWS_BUCKET=$AWS_BUCKET
