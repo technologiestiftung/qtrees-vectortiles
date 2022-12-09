@@ -15,4 +15,4 @@ echo "system: downloading tileset to tileset directory... $TILESET_DIR"
 aws s3api get-object --bucket "$AWS_BUCKET" --key "$TILESET_NAME" "$TILESET_DIR/$TILESET_NAME"
 
 echo "mbtileserver: Starting tile server with args: $*"
-mbtileserver "$@"
+mbtileserver --dir "$TILESET_DIR" --enable-fs-watch
