@@ -1,3 +1,21 @@
+## [2.5.1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.0...v2.5.1) (2022-12-09)
+
+
+### Bug Fixes
+
+* Remove env set ([792c74b](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/792c74baf3fc7e8a842db8ebcd4398b39c4cb0de))
+
+
+
+
+
+## [2.5.1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.0...v2.5.1) (2022-12-09)
+
+
+### Bug Fixes
+
+* Remove env set ([792c74b](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/792c74baf3fc7e8a842db8ebcd4398b39c4cb0de))
+
 # [2.5.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.4.0...v2.5.0) (2022-12-09)
 
 
