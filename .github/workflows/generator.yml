@@ -42,23 +42,23 @@ jobs:
       - name: Output path
         run: |
           echo "The path of the generated tileset is ${{ steps.generator.outputs.tileset_path }}"
-      - name: Upload artifact to s3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          SOURCE_DIR: ${{ steps.generator.outputs.tileset_path }}
-          DEST_DIR: tilesets
-      # - name: Upload artifact
-      #   uses: actions/upload-artifact@v2
+      # - name: Upload artifact to s3
+      #   uses: jakejarvis/s3-sync-action@master
       #   with:
-      #       name: tileset
-      #       path: trees.mbtiles
-      #       if-no-files-found: error
+      #     args: --acl public-read
+      #   env:
+      #     AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET }}
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      #     SOURCE_DIR: ${{ steps.generator.outputs.tileset_path }}
+      #     DEST_DIR: ./ 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: tileset
+            path: trees.mbtiles
+            if-no-files-found: error
       # add tmate action to debug
       # - name: Setup tmate session
       #   if: ${{ failure() }}
