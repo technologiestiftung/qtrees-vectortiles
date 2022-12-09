@@ -71,7 +71,7 @@ jobs:
       #       limit-access-to-actor: true
       #   # now notify the render to use the new tileset
       #   # by downloading it and restarting the server
-    #   - name: 'run render webhook'
-    #     if: github.event_name == 'release' && github.event.action == 'published'
-    #     run: |
-    #       curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
+      - name: 'run render webhook'
+        # if: github.event_name == 'release' && github.event.action == 'published'
+        run: |
+          curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
