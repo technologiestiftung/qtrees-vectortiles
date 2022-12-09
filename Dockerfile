@@ -14,4 +14,4 @@ COPY server.sh server.sh
 
 EXPOSE 8000
 ENTRYPOINT [ "/usr/app/server.sh" ]
-CMD [ "--dir", "${TILESET_DIR}", "--enable-fs-watch" ]
+CMD --dir $TILESET_DIR --enable-fs-watch
