@@ -1,3 +1,49 @@
+# [2.4.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.2...v2.4.0) (2022-12-09)
+
+
+### Bug Fixes
+
+* Add zip/unzip to base ([aeb443a](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/aeb443aecd95a9060c6804ec89bf41f6b9e8d4bc))
+* Env var naming [skip ci] ([09339a4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/09339a40a8b8efb4e1dc24c9030dc50959f9723a))
+* **ENV:** Set env vars in docker compose ([d15c32d](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/d15c32d09d02ff33c5ec9cc73004a0e3795210e5))
+* image name [skip ci] ([b8bef51](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/b8bef51939df193701c1ac23ec7aa5330818423f))
+* Naming error in arg ([0005bdf](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/0005bdf52211803322747e76c3137979784ddba7))
+* Tilesetname as env var ([482f627](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/482f62703dd7d0822bda3de6326a365e1462aaff))
+* Wrong ident [skip ci] ([0602893](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/0602893c84b4e3727bbc3f511a76b67b246e8492))
+
+
+### Features
+
+* Add jq to base image ([9d82a2c](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/9d82a2c9c6fe1575d98276b832560af017bfcff5))
+* Make server pull tileset from github ([19db126](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/19db126d8ca4f6d882ff6b009eb2ebeac5d5f37a))
+* Slim server image [skip ci] ([f42c1a1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/f42c1a11d17590685b780a080ab5c4fcf38ab78a))
+* Use AWS CLI to download from bucket ([eec1ec2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/eec1ec2d94f40ea54c575d240811ef34355b7db4))
+
+
+
+
+
+# [2.4.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.2...v2.4.0) (2022-12-09)
+
+
+### Bug Fixes
+
+* Add zip/unzip to base ([aeb443a](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/aeb443aecd95a9060c6804ec89bf41f6b9e8d4bc))
+* Env var naming [skip ci] ([09339a4](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/09339a40a8b8efb4e1dc24c9030dc50959f9723a))
+* **ENV:** Set env vars in docker compose ([d15c32d](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/d15c32d09d02ff33c5ec9cc73004a0e3795210e5))
+* image name [skip ci] ([b8bef51](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/b8bef51939df193701c1ac23ec7aa5330818423f))
+* Naming error in arg ([0005bdf](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/0005bdf52211803322747e76c3137979784ddba7))
+* Tilesetname as env var ([482f627](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/482f62703dd7d0822bda3de6326a365e1462aaff))
+* Wrong ident [skip ci] ([0602893](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/0602893c84b4e3727bbc3f511a76b67b246e8492))
+
+
+### Features
+
+* Add jq to base image ([9d82a2c](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/9d82a2c9c6fe1575d98276b832560af017bfcff5))
+* Make server pull tileset from github ([19db126](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/19db126d8ca4f6d882ff6b009eb2ebeac5d5f37a))
+* Slim server image [skip ci] ([f42c1a1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/f42c1a11d17590685b780a080ab5c4fcf38ab78a))
+* Use AWS CLI to download from bucket ([eec1ec2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/eec1ec2d94f40ea54c575d240811ef34355b7db4))
+
 ## [2.3.2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.1...v2.3.2) (2022-12-08)
 
 
