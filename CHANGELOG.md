@@ -1,3 +1,33 @@
+# [2.5.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.4.0...v2.5.0) (2022-12-09)
+
+
+### Bug Fixes
+
+* Missed the put object [skip ci] ([6bc52f8](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/6bc52f8c52f33744920f91351c9ae3b1d1bcb2d4))
+* use the variable not a string [skip ci] ([1f02d75](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/1f02d759b9892fa0447256e4f45a932ef4ce99f3))
+
+
+### Features
+
+* **render:** Get ready for render ([fd0f3c2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/fd0f3c2e3b0fcc2e63cd288946e485367aed58f9))
+
+
+
+
+
+# [2.5.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.4.0...v2.5.0) (2022-12-09)
+
+
+### Bug Fixes
+
+* Missed the put object [skip ci] ([6bc52f8](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/6bc52f8c52f33744920f91351c9ae3b1d1bcb2d4))
+* use the variable not a string [skip ci] ([1f02d75](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/1f02d759b9892fa0447256e4f45a932ef4ce99f3))
+
+
+### Features
+
+* **render:** Get ready for render ([fd0f3c2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/fd0f3c2e3b0fcc2e63cd288946e485367aed58f9))
+
 # [2.4.0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.3.2...v2.4.0) (2022-12-09)
 
 
