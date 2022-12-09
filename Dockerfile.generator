@@ -1,4 +1,4 @@
-FROM technologiestiftung/qtrees-vectortiles-generator-base:2.2.0
+FROM technologiestiftung/qtrees-vectortiles-generator-base:2.5
 
 # ENV POSTGRES_HOST postgres
 # ENV POSTGRES_DB postgres

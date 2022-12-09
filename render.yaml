@@ -21,16 +21,16 @@ services:
         sync: false
       - key: AWS_ACCESS_KEY_ID
         sync: false
-      - key: AWS_DEFAULT_REGION 
+      - key: AWS_DEFAULT_REGION
         sync: false
-      - key:  AWS_BUCKET
+      - key: AWS_BUCKET
         sync: false
 
       - key: BASE_IMAGE
-        value: technologiestiftung/qtrees-vectortiles-generator-base:main 
-        sync: true 
+        value: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+        sync: true
       - key: TILESET_NAME
-        value: trees.mbtiles 
+        value: trees.mbtiles
         sync: true
       - key: TILESET_DIR
         value: /tilesets
