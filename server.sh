@@ -5,16 +5,14 @@ IFS=$'\n\t'
 echo "system: Running $0"
 echo "system: Creating tileset directory...$TILESET_DIR"
 mkdir -p "$TILESET_DIR"
+export TILESET_NAME="trees.mbtiles"
+export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+export AWS_BUCKET=$AWS_BUCKET
+export AWS_DEFAULT_REGION=eu-central-1
 
-# download artifact from github actions and copy to $TILESET_DIR
-echo "system: filtering build artifacts for tileset..."
-# save output of command in variable
-TILESET_URL=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/technologiestiftung/qtrees-vectortiles-generator/actions/artifacts | jq -r '.artifacts[] | select(.name == "tileset") | .archive_download_url')
-echo "system: found the following url... $TILESET_URL"
-# download via curl from  $TILESET_URL and unzip to $TILESET_DIR
 echo "system: downloading tileset to tileset directory... $TILESET_DIR"
-curl -o trees-tileset.zip "$TILESET_URL"
-unzip trees-tileset.zip -d "$TILESET_DIR"
+aws s3api get-object --bucket "$AWS_BUCKET" --key "$TILESET_NAME" "$TILESET_DIR/$TILESET_NAME"
 
 echo "mbtileserver: Starting tile server with args: $*"
 mbtileserver "$@"
