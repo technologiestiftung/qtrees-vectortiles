@@ -52,13 +52,13 @@ jobs:
       #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       #     SOURCE_DIR: ${{ steps.generator.outputs.tileset_path }}
-      #     DEST_DIR: ./ 
+      #     DEST_DIR: ./
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-            name: tileset
-            path: trees.mbtiles
-            if-no-files-found: error
+          name: tileset
+          path: trees.mbtiles
+          if-no-files-found: warn
       # add tmate action to debug
       # - name: Setup tmate session
       #   if: ${{ failure() }}
@@ -69,3 +69,7 @@ jobs:
       #       limit-access-to-actor: true
       #   # now notify the render to use the new tileset
       #   # by downloading it and restarting the server
+    #   - name: 'run render webhook'
+    #     if: github.event_name == 'release' && github.event.action == 'published'
+    #     run: |
+    #       curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}
