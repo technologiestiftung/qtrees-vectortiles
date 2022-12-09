@@ -1,3 +1,25 @@
+## [2.5.2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.1...v2.5.2) (2022-12-09)
+
+
+### Bug Fixes
+
+* Define cmd for server [skip ci] ([b4fca57](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/b4fca578723be62197667e85ac5d64f5f284cfe5))
+* move  args to entrypoint [skip ci] ([66a673f](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/66a673f49f64f416a959f3c7baf4f3a442e01457))
+* move  args to entrypoint [skip ci] ([58a74fc](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/58a74fca17bdc77e8e4128fe626374a9b66aac9e))
+
+
+
+
+
+## [2.5.2](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.1...v2.5.2) (2022-12-09)
+
+
+### Bug Fixes
+
+* Define cmd for server [skip ci] ([b4fca57](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/b4fca578723be62197667e85ac5d64f5f284cfe5))
+* move  args to entrypoint [skip ci] ([66a673f](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/66a673f49f64f416a959f3c7baf4f3a442e01457))
+* move  args to entrypoint [skip ci] ([58a74fc](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/58a74fca17bdc77e8e4128fe626374a9b66aac9e))
+
 ## [2.5.1](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.0...v2.5.1) (2022-12-09)
 
 
