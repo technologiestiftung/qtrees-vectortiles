@@ -1,10 +1,10 @@
-ARG IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.2
-FROM $IMAGE
+ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.2
+FROM $BASE_IMAGE
 
 ARG TILESET_DIR=/tileset
 ARG TMP_DIR=/tmp
 ARG TILESET_NAME=trees.mbtiles
-
+ENV GITHUB_TOKEN "abc"
 ENV WORK_DIR /usr/app
 ENV TILESET_DIR $TILESET_DIR
 ENV TMP_DIR $TMP_DIR

@@ -4,7 +4,13 @@ services:
         environment:
             # these variables are used in the entrypoint.sh script
             - TILESET_DIR=/tilesets
-            - TMP_DIR=/temp
+            - TMP_DIR=/tmp
+            - GITHUB_TOKEN=${GITHUB_TOKEN}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+            - AWS_BUCKET=${AWS_BUCKET}
+            - TILESET_NAME=${TILESET_NAME}
             # The values below need to be changed in production
             # - POSTGRES_HOST=postgres
             # - POSTGRES_DB=postgres
