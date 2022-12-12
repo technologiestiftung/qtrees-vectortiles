@@ -1,10 +1,10 @@
 name: Daily Update
 on:
-  repository_dispatch:
-    types: [nightly-release]
+  # repository_dispatch:
+    # types: [nightly-release]
     # $ curl -v -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/[org-name-or-username]/[repository]/dispatches -d '{ "event_type": "semantic-release" }'
 
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
   update:
