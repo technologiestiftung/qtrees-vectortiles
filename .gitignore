@@ -1,5 +1,6 @@
 .env
-data/postgres
+.envrc
+*data/postgres
 _data/trees.mbtiles
 _data/tilesets/trees.mbtiles
 
@@ -135,3 +136,5 @@ dist
 .pnp.*
 _data/temp/out.full.geojson
 _data/temp/trees.mbtiles
+
+introspection/data/postgres
