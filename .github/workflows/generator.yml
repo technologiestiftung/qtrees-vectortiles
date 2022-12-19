@@ -1,13 +1,23 @@
 name: Tileset Generator
 on:
+  # POST request to https://api.github.com/repos/technologiestiftung/qtrees-vectortiles-generator/dispatches with JSON body of { "event_type": "nightly-release", "client_payload": { "environment": "staging" } }
+  # environment is: staging or production
   repository_dispatch:
     types: [nightly-release]
-  workflow_dispatch: {}
+
+  # workflow_dispatch:
+  #   inputs:
+  #     environment:
+  #       description: Set the environment to run in the background
+  #       required: true
+  #       default: staging
 
 jobs:
   generator:
     name: Generate the tileset
     runs-on: ubuntu-latest
+
+    environment: ${{ github.event.client_payload.environment }}
     container:
       image: technologiestiftung/qtrees-vectortiles-generator-base:2.5
       credentials:
