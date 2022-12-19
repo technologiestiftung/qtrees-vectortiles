@@ -1,5 +1,5 @@
 SELECT
-	trees.gml_id AS trees_gml_id,
+	trees.id AS trees_id,
 	trees. "baumid" AS trees_baumid,
 	trees. "standortnr" AS trees_standortnr,
 	trees. "kennzeich" AS trees_kennzeich,
@@ -23,7 +23,7 @@ SELECT
 	trees. "lng" AS trees_lng,
 	trees. "created_at" AS trees_created_at,
 	trees. "updated_at" AS trees_updated_at,
-	_nowcast. "baum_id" AS nowcast_baum_id,
+	_nowcast. "tree_id" AS nowcast_tree_id,
 	_nowcast. "nowcast_type_30cm" AS nowcast_type_30cm,
 	_nowcast. "nowcast_type_60cm" AS nowcast_type_60cm,
 	_nowcast. "nowcast_type_90cm" AS nowcast_type_90cm,
@@ -48,7 +48,7 @@ FROM
 	api.trees
 	LEFT JOIN (
 		SELECT
-			nowcast_baum_id AS baum_id,
+			nowcast_tree_id AS tree_id,
 			ARRAY_AGG(DISTINCT distinct_nowcast.forcast_type ORDER BY distinct_nowcast.forcast_type) AS nowcast_types_array,
 			(ARRAY_AGG(forecast_types_id))[1] nowcast_type_30cm,
 			(ARRAY_AGG(forecast_types_id))[2] nowcast_type_60cm,
@@ -70,10 +70,10 @@ FROM
 			(ARRAY_AGG(nowcast_timestamp))[2] nowcast_timestamp_60cm,
 			(ARRAY_AGG(nowcast_timestamp))[3] nowcast_timestamp_90cm,
 			(ARRAY_AGG(nowcast_timestamp))[4] nowcast_timestamp_stamm
-		FROM ( SELECT DISTINCT ON (n.baum_id, f. "name")
+		FROM ( SELECT DISTINCT ON (n.tree_id, f. "name")
 				n.id AS nowcast_id,
 				n. "timestamp" AS nowcast_timestamp,
-				n.baum_id AS nowcast_baum_id,
+				n.tree_id AS nowcast_tree_id,
 				n. "value" AS nowcast_value,
 				n.created_at AS nowcast_created_at,
 				n.model_id AS nowcast_model_id,
@@ -83,9 +83,9 @@ FROM
 				api.nowcast n
 				JOIN api.forecast_types f ON n.type_id = f.id
 			ORDER BY
-				n.baum_id,
+				n.tree_id,
 				f. "name",
 				n. "timestamp" DESC) distinct_nowcast
 		GROUP BY
-			nowcast_baum_id) AS _nowcast ON trees.gml_id = _nowcast.baum_id
+			nowcast_tree_id) AS _nowcast ON trees.id = _nowcast.tree_id
 LIMIT 10

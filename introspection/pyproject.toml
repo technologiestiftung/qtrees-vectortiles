@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "introspection"
+version = "0.1.0"
+description = ""
+authors = ["ff6347 <hash@ff6347.email>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11"
+migra = {extras = ["pg"], version = "^3.0.1663481299"}
+
+[tool.poetry.group.dev.dependencies]
+pytest-black = "^0.3.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,4 @@
+# shellcheck disable=SC2148
+# postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
+export SOURCE_DB_URL="postgresql://user:pass@instance.eu-central-1.rds.amazonaws.com:5432/qtrees"
+export TARGET_DB_URL="postgresql://postgres:postgres@localhost:5432/postgres"
