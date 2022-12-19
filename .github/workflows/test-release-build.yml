@@ -2,7 +2,7 @@ name: Docker CI
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TILESET_NAME: trees-test.mbtiles
+  TILESET_NAME: trees.mbtiles
   TILESET_DIR: /tilesets
   TMP_DIR: /tmp
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
