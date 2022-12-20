@@ -1,3 +1,21 @@
+## [2.5.6](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.5...v2.5.6) (2022-12-20)
+
+
+### Bug Fixes
+
+* SQL Query to match new schema ([ddf43b0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/ddf43b0123b7b43fadf3087c46f57a125c8d1aab))
+
+
+
+
+
+## [2.5.6](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.5...v2.5.6) (2022-12-20)
+
+
+### Bug Fixes
+
+* SQL Query to match new schema ([ddf43b0](https://github.com/technologiestiftung/qtrees-vectortiles-generator/commit/ddf43b0123b7b43fadf3087c46f57a125c8d1aab))
+
 ## [2.5.5](https://github.com/technologiestiftung/qtrees-vectortiles-generator/compare/v2.5.4...v2.5.5) (2022-12-12)
 
 
