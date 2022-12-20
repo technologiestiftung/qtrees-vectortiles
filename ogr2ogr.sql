@@ -1,6 +1,5 @@
 SELECT
 	trees.id AS trees_id,
-	trees. "baumid" AS trees_baumid,
 	trees. "standortnr" AS trees_standortnr,
 	trees. "kennzeich" AS trees_kennzeich,
 	trees. "namenr" AS trees_namenr,
@@ -81,7 +80,7 @@ FROM
 				f.id AS forecast_types_id
 			FROM
 				api.nowcast n
-				JOIN api.forecast_types f ON n.type_id = f.id
+				JOIN api.forecast_types f ON n.forecast_type_id = f.id
 			ORDER BY
 				n.tree_id,
 				f. "name",
