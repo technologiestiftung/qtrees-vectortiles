@@ -39,6 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GH_PA_TOKEN}}
         run: |
           docker build --tag qtrees-vectortiles-generator-base:test --file ./Dockerfile.base .
+          docker compose --file docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
           docker compose --file docker-compose.yml --file docker-compose.test.yml up --abort-on-container-exit --no-color --exit-code-from mbtileserver
   release:
     name: Release
