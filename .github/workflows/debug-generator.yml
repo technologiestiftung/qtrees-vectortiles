@@ -1,4 +1,4 @@
-name: Docker CI
+name: Debug generator
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
