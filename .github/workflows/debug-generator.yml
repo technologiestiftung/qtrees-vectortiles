@@ -10,7 +10,6 @@ env:
   AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
 
-  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.5
 on:
   push:
     branches: ['test/QTREES-439/add-tests-for-vectortiles-generator-script']
@@ -24,17 +23,50 @@ on:
     types: [published]
 
 jobs:
-  test:
+  test-generator:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-20.04
+    container:
+      image: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+    services:
+      postgres:
+        image: postgis/postgis:14-3.2
+        volumes:
+          - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout technologiestiftung/qtrees-vectortiles-generator
         uses: actions/checkout@v3
       - name: test docker compose
         env:
-          GITHUB_TOKEN: ${{secrets.GH_PA_TOKEN}}
+          POSTGRES_HOST: postgres
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_PORT: '5432'
+
+          TILESET_DIR: /tilesets
+          TILESET_NAME: trees.mbtiles
+          TMP_DIR: /tmp
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-central-1
+          AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
+
         run: |
-          docker compose --file docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
+          echo "Running the generator"
+          ./generator.sh
       - name: Tmate session
         if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3
