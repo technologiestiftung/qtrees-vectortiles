@@ -1,0 +1,42 @@
+name: Docker CI
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  TILESET_NAME: trees.mbtiles
+  TILESET_DIR: /tilesets
+  TMP_DIR: /tmp
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+  AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+on:
+  push:
+    branches: ['test/QTREES-439/add-tests-for-vectortiles-generator-script']
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+  release:
+    types: [published]
+
+jobs:
+  test:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout technologiestiftung/qtrees-vectortiles-generator
+        uses: actions/checkout@v3
+      - name: test docker compose
+        env:
+          GITHUB_TOKEN: ${{secrets.GH_PA_TOKEN}}
+        run: |
+          docker compose --file docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
+      - name: Tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true

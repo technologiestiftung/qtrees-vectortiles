@@ -24,8 +24,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test.generator
-      args:
-        - BASE_IMAGE=qtrees-vectortiles-generator-base:test
+      # args:
+      # - BASE_IMAGE=qtrees-vectortiles-generator-base:test
     container_name: qtrees-vectortiles-generator-base-generator
     environment:
       - POSTGRES_HOST=postgres

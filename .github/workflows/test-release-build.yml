@@ -41,6 +41,12 @@ jobs:
           docker build --tag qtrees-vectortiles-generator-base:test --file ./Dockerfile.base .
           docker compose --file docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
           docker compose --file docker-compose.yml --file docker-compose.test.yml up --abort-on-container-exit --no-color --exit-code-from mbtileserver
+      - name: Tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
   release:
     name: Release
     runs-on: ubuntu-latest
