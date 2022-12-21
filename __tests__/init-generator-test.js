@@ -25,7 +25,9 @@ async function main() {
 		console.log(result_seed);
 	} catch (error) {
 		console.error(error);
-	}
+	}finally{
+    await sql.end();
+  }
 }
 
 main().catch(console.error);
