@@ -1,11 +1,11 @@
 -- This schema ddoes not refelct the whole setup. It only contains the api schema. The other schemas are created documented here
-CREATE EXTENSION postgis;
+-- CREATE EXTENSION postgis;
 
-CREATE EXTENSION fuzzystrmatch;
+-- CREATE EXTENSION fuzzystrmatch;
 
-CREATE EXTENSION postgis_tiger_geocoder;
+-- CREATE EXTENSION postgis_tiger_geocoder;
 
-CREATE EXTENSION postgis_topology;
+-- CREATE EXTENSION postgis_topology;
 
 CREATE SCHEMA IF NOT EXISTS "api";
 
