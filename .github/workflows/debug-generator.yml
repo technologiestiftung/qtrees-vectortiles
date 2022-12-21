@@ -31,8 +31,6 @@ jobs:
     services:
       postgres:
         image: postgis/postgis:14-3.2
-        volumes:
-          - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
