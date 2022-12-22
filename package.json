@@ -1,6 +1,7 @@
 {
   "name": "@technologiestiftung/qtrees-vectortiles-generator",
   "version": "2.5.5",
+  "type": "module",
   "devDependencies": {
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/commit-analyzer": "9.0.2",
@@ -8,6 +9,7 @@
     "@semantic-release/github": "8.0.5",
     "@semantic-release/npm": "9.0.1",
     "@semantic-release/release-notes-generator": "10.0.3",
+    "postgres": "3.3.2",
     "semantic-release": "19.0.3"
   }
 }
