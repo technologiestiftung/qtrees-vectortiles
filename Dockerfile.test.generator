@@ -1,6 +1,0 @@
-ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.5
-FROM $BASE_IMAGE
-
-COPY generator.sh generator.sh
-
-ENTRYPOINT [ "./generator.sh" ]

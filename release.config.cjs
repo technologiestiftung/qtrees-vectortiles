@@ -1,20 +1,13 @@
 module.exports = {
-	branches: [{ name: "main" }],
-	npmPublish: false,
-	dryRun: false,
+	extends: "@technologiestiftung/semantic-release-config",
+	branches: [{ name: "main" }, { name: "staging", channel: "pre/rc", prerelease: "rc" }],
 	plugins: [
 		[
-			"@semantic-release/commit-analyzer",
+			"@saithodev/semantic-release-backmerge",
 			{
-				preset: "angular",
-				releaseRules: [{ type: "nightly", release: "patch" }],
+				branch: ["staging"],
+				backmergeStrategy: "merge",
 			},
 		],
-		"@semantic-release/release-notes-generator",
-		"@semantic-release/changelog",
-		"@semantic-release/npm",
-		"@semantic-release/git",
-		"@semantic-release/github",
-		"@semantic-release/release-notes-generator",
 	],
 };
