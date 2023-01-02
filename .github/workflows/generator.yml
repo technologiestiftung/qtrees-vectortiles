@@ -66,7 +66,7 @@ jobs:
       #     SOURCE_DIR: ${{ steps.generator.outputs.tileset_path }}
       #     DEST_DIR: ./
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: tileset
           path: trees.mbtiles
