@@ -1,6 +1,6 @@
 name: Tileset Generator
 on:
-  # POST request to https://api.github.com/repos/technologiestiftung/qtrees-vectortiles-generator/dispatches with JSON body of { "event_type": "nightly-release", "client_payload": { "environment": "staging" } }
+  # POST request to https://public.github.com/repos/technologiestiftung/qtrees-vectortiles-generator/dispatches with JSON body of { "event_type": "nightly-release", "client_payload": { "environment": "staging" } }
   # environment is: staging or production
   repository_dispatch:
     types: [nightly-release]
