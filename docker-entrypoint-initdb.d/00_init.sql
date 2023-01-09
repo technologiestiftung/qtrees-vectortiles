@@ -45,7 +45,7 @@ CREATE TABLE "public"."issues" (
 CREATE TABLE "public"."nowcast" (
 	"id" integer NOT NULL DEFAULT nextval('public.nowcast_id_seq'::regclass),
 	"tree_id" text,
-	"forecast_type_id" smallint,
+	"type_id" smallint,
 	"timestamp" timestamp without time zone,
 	"value" double precision,
 	"created_at" timestamp without time zone,
@@ -240,9 +240,9 @@ ALTER TABLE "public"."weather_stations"
 	ADD CONSTRAINT "weather_stations_pkey" PRIMARY KEY USING INDEX "weather_stations_pkey";
 
 ALTER TABLE "public"."forecast"
-	ADD CONSTRAINT "forecast_forecast_type_id_fkey" FOREIGN KEY (forecast_type_id) REFERENCES public.sensor_types (id) NOT valid;
+	ADD CONSTRAINT "forecast_type_id_fkey" FOREIGN KEY (type_id) REFERENCES public.sensor_types (id) NOT valid;
 
-ALTER TABLE "public"."forecast" validate CONSTRAINT "forecast_forecast_type_id_fkey";
+ALTER TABLE "public"."forecast" validate CONSTRAINT "forecast_type_id_fkey";
 
 ALTER TABLE "public"."forecast"
 	ADD CONSTRAINT "forecast_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES public.trees (id) NOT valid;
@@ -250,9 +250,9 @@ ALTER TABLE "public"."forecast"
 ALTER TABLE "public"."forecast" validate CONSTRAINT "forecast_tree_id_fkey";
 
 ALTER TABLE "public"."nowcast"
-	ADD CONSTRAINT "nowcast_forecast_type_id_fkey" FOREIGN KEY (forecast_type_id) REFERENCES public.sensor_types (id) NOT valid;
+	ADD CONSTRAINT "nowcast_type_id_fkey" FOREIGN KEY (type_id) REFERENCES public.sensor_types (id) NOT valid;
 
-ALTER TABLE "public"."nowcast" validate CONSTRAINT "nowcast_forecast_type_id_fkey";
+ALTER TABLE "public"."nowcast" validate CONSTRAINT "nowcast_type_id_fkey";
 
 ALTER TABLE "public"."nowcast"
 	ADD CONSTRAINT "nowcast_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES public.trees (id) NOT valid;

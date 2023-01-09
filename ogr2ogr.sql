@@ -80,7 +80,7 @@ FROM
 				f.id AS sensor_types_id
 			FROM
 				public.nowcast n
-				JOIN public.sensor_types f ON n.forecast_type_id = f.id
+				JOIN public.sensor_types f ON n.type_id = f.id
 			ORDER BY
 				n.tree_id,
 				f. "name",
