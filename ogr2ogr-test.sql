@@ -44,15 +44,15 @@ SELECT
 	_nowcast. "nowcast_model_id_90cm" AS nowcast_model_id_90cm,
 	_nowcast. "nowcast_model_id_stamm" AS nowcast_model_id_4
 FROM
-	api.trees
+	public.trees
 	LEFT JOIN (
 		SELECT
 			nowcast_tree_id AS tree_id,
 			ARRAY_AGG(DISTINCT distinct_nowcast.forcast_type ORDER BY distinct_nowcast.forcast_type) AS nowcast_types_array,
-			(ARRAY_AGG(forecast_types_id))[1] nowcast_type_30cm,
-			(ARRAY_AGG(forecast_types_id))[2] nowcast_type_60cm,
-			(ARRAY_AGG(forecast_types_id))[3] nowcast_type_90cm,
-			(ARRAY_AGG(forecast_types_id))[4] nowcast_type_stamm,
+			(ARRAY_AGG(sensor_types_id))[1] nowcast_type_30cm,
+			(ARRAY_AGG(sensor_types_id))[2] nowcast_type_60cm,
+			(ARRAY_AGG(sensor_types_id))[3] nowcast_type_90cm,
+			(ARRAY_AGG(sensor_types_id))[4] nowcast_type_stamm,
 			(ARRAY_AGG(distinct_nowcast.nowcast_value))[1] nowcast_values_30cm,
 			(ARRAY_AGG(distinct_nowcast.nowcast_value))[2] nowcast_values_60cm,
 			(ARRAY_AGG(distinct_nowcast.nowcast_value))[3] nowcast_values_90cm,
@@ -77,10 +77,10 @@ FROM
 				n.created_at AS nowcast_created_at,
 				n.model_id AS nowcast_model_id,
 				f. "name" AS forcast_type,
-				f.id AS forecast_types_id
+				f.id AS sensor_types_id
 			FROM
-				api.nowcast n
-				JOIN api.forecast_types f ON n.forecast_type_id = f.id
+				public.nowcast n
+				JOIN public.sensor_types f ON n.type_id = f.id
 			ORDER BY
 				n.tree_id,
 				f. "name",
