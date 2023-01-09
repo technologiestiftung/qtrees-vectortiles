@@ -7,67 +7,65 @@ CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
 
 CREATE EXTENSION IF NOT EXISTS postgis_topology;
 
-CREATE SCHEMA IF NOT EXISTS "api";
+CREATE SEQUENCE "public"."forecast_id_seq";
 
-CREATE SEQUENCE "api"."forecast_id_seq";
+CREATE SEQUENCE "public"."nowcast_id_seq";
 
-CREATE SEQUENCE "api"."nowcast_id_seq";
+CREATE SEQUENCE "public"."radolan_id_seq";
 
-CREATE SEQUENCE "api"."radolan_id_seq";
-
-CREATE TABLE "api"."forecast" (
-	"id" integer NOT NULL DEFAULT nextval('api.forecast_id_seq'::regclass),
+CREATE TABLE "public"."forecast" (
+	"id" integer NOT NULL DEFAULT nextval('public.forecast_id_seq'::regclass),
 	"tree_id" text,
-	"forecast_type_id" smallint,
+	"type_id" smallint,
 	"timestamp" timestamp without time zone,
 	"value" double precision,
 	"created_at" timestamp without time zone,
 	"model_id" text
 );
 
-CREATE TABLE "api"."forecast_types" (
+CREATE TABLE "public"."sensor_types" (
 	"id" smallint NOT NULL,
 	"name" text NOT NULL
 );
 
-CREATE TABLE "api"."issue_types" (
+CREATE TABLE "public"."issue_types" (
 	"id" integer NOT NULL,
 	"title" text NOT NULL,
 	"description" text NOT NULL,
 	"image_url" text
 );
 
-CREATE TABLE "api"."issues" (
+CREATE TABLE "public"."issues" (
 	"id" integer NOT NULL,
 	"issue_type_id" integer NOT NULL,
 	"created_at" timestamp with time zone NOT NULL DEFAULT now(),
 	"gml_id" text NOT NULL
 );
 
-CREATE TABLE "api"."nowcast" (
-	"id" integer NOT NULL DEFAULT nextval('api.nowcast_id_seq'::regclass),
+CREATE TABLE "public"."nowcast" (
+	"id" integer NOT NULL DEFAULT nextval('public.nowcast_id_seq'::regclass),
 	"tree_id" text,
-	"forecast_type_id" smallint,
+	"type_id" smallint,
 	"timestamp" timestamp without time zone,
 	"value" double precision,
 	"created_at" timestamp without time zone,
 	"model_id" text
 );
 
-CREATE TABLE "api"."radolan" (
-	"id" integer NOT NULL DEFAULT nextval('api.radolan_id_seq'::regclass),
+CREATE TABLE "public"."radolan" (
+	"id" integer NOT NULL DEFAULT nextval('public.radolan_id_seq'::regclass),
 	"rainfall_mm" double precision,
 	"geometry" geometry(polygon, 4326),
 	"timestamp" timestamp without time zone
 );
 
-CREATE TABLE "api"."shading" (
+CREATE TABLE "public"."shading" (
 	"tree_id" text NOT NULL,
 	"month" smallint NOT NULL,
 	"index" double precision
 );
 
-CREATE TABLE "api"."soil" (
+CREATE TABLE "public"."soil" (
 	"id" text NOT NULL,
 	"schl5" bigint,
 	"nutz" double precision,
@@ -124,7 +122,7 @@ CREATE TABLE "api"."soil" (
 	"updated_at" date
 );
 
-CREATE TABLE "api"."trees" (
+CREATE TABLE "public"."trees" (
 	"id" text NOT NULL,
 	"standortnr" text,
 	"kennzeich" text,
@@ -151,7 +149,7 @@ CREATE TABLE "api"."trees" (
 	"street_tree" boolean
 );
 
-CREATE TABLE "api"."weather" (
+CREATE TABLE "public"."weather" (
 	"stations_id" bigint,
 	"mess_datum" timestamp without time zone,
 	"qn_3" bigint,
@@ -173,7 +171,7 @@ CREATE TABLE "api"."weather" (
 	"eor" text
 );
 
-CREATE TABLE "api"."weather_stations" (
+CREATE TABLE "public"."weather_stations" (
 	"id" bigint NOT NULL,
 	"von_datum" date,
 	"bis_datum" date,
@@ -185,84 +183,84 @@ CREATE TABLE "api"."weather_stations" (
 	"geometry" geometry(point, 4326)
 );
 
-ALTER SEQUENCE "api"."forecast_id_seq" owned BY "api"."forecast"."id";
+ALTER SEQUENCE "public"."forecast_id_seq" owned BY "public"."forecast"."id";
 
-ALTER SEQUENCE "api"."nowcast_id_seq" owned BY "api"."nowcast"."id";
+ALTER SEQUENCE "public"."nowcast_id_seq" owned BY "public"."nowcast"."id";
 
-ALTER SEQUENCE "api"."radolan_id_seq" owned BY "api"."radolan"."id";
+ALTER SEQUENCE "public"."radolan_id_seq" owned BY "public"."radolan"."id";
 
-CREATE UNIQUE INDEX forecast_pkey ON api.forecast USING btree (id);
+CREATE UNIQUE INDEX forecast_pkey ON public.forecast USING btree (id);
 
-CREATE UNIQUE INDEX forecast_types_pkey ON api.forecast_types USING btree (id);
+CREATE UNIQUE INDEX sensor_types_pkey ON public.sensor_types USING btree (id);
 
-CREATE UNIQUE INDEX issue_types_pkey ON api.issue_types USING btree (id);
+CREATE UNIQUE INDEX issue_types_pkey ON public.issue_types USING btree (id);
 
-CREATE UNIQUE INDEX issues_pkey ON api.issues USING btree (id);
+CREATE UNIQUE INDEX issues_pkey ON public.issues USING btree (id);
 
-CREATE UNIQUE INDEX nowcast_pkey ON api.nowcast USING btree (id);
+CREATE UNIQUE INDEX nowcast_pkey ON public.nowcast USING btree (id);
 
-CREATE UNIQUE INDEX radolan_pkey ON api.radolan USING btree (id);
+CREATE UNIQUE INDEX radolan_pkey ON public.radolan USING btree (id);
 
-CREATE UNIQUE INDEX shading_pkey ON api.shading USING btree (tree_id, month);
+CREATE UNIQUE INDEX shading_pkey ON public.shading USING btree (tree_id, month);
 
-CREATE UNIQUE INDEX soil_pkey ON api.soil USING btree (id);
+CREATE UNIQUE INDEX soil_pkey ON public.soil USING btree (id);
 
-CREATE UNIQUE INDEX trees_pkey ON api.trees USING btree (id);
+CREATE UNIQUE INDEX trees_pkey ON public.trees USING btree (id);
 
-CREATE UNIQUE INDEX weather_stations_pkey ON api.weather_stations USING btree (id);
+CREATE UNIQUE INDEX weather_stations_pkey ON public.weather_stations USING btree (id);
 
-ALTER TABLE "api"."forecast"
+ALTER TABLE "public"."forecast"
 	ADD CONSTRAINT "forecast_pkey" PRIMARY KEY USING INDEX "forecast_pkey";
 
-ALTER TABLE "api"."forecast_types"
-	ADD CONSTRAINT "forecast_types_pkey" PRIMARY KEY USING INDEX "forecast_types_pkey";
+ALTER TABLE "public"."sensor_types"
+	ADD CONSTRAINT "sensor_types_pkey" PRIMARY KEY USING INDEX "sensor_types_pkey";
 
-ALTER TABLE "api"."issue_types"
+ALTER TABLE "public"."issue_types"
 	ADD CONSTRAINT "issue_types_pkey" PRIMARY KEY USING INDEX "issue_types_pkey";
 
-ALTER TABLE "api"."issues"
+ALTER TABLE "public"."issues"
 	ADD CONSTRAINT "issues_pkey" PRIMARY KEY USING INDEX "issues_pkey";
 
-ALTER TABLE "api"."nowcast"
+ALTER TABLE "public"."nowcast"
 	ADD CONSTRAINT "nowcast_pkey" PRIMARY KEY USING INDEX "nowcast_pkey";
 
-ALTER TABLE "api"."radolan"
+ALTER TABLE "public"."radolan"
 	ADD CONSTRAINT "radolan_pkey" PRIMARY KEY USING INDEX "radolan_pkey";
 
-ALTER TABLE "api"."shading"
+ALTER TABLE "public"."shading"
 	ADD CONSTRAINT "shading_pkey" PRIMARY KEY USING INDEX "shading_pkey";
 
-ALTER TABLE "api"."soil"
+ALTER TABLE "public"."soil"
 	ADD CONSTRAINT "soil_pkey" PRIMARY KEY USING INDEX "soil_pkey";
 
-ALTER TABLE "api"."trees"
+ALTER TABLE "public"."trees"
 	ADD CONSTRAINT "trees_pkey" PRIMARY KEY USING INDEX "trees_pkey";
 
-ALTER TABLE "api"."weather_stations"
+ALTER TABLE "public"."weather_stations"
 	ADD CONSTRAINT "weather_stations_pkey" PRIMARY KEY USING INDEX "weather_stations_pkey";
 
-ALTER TABLE "api"."forecast"
-	ADD CONSTRAINT "forecast_forecast_type_id_fkey" FOREIGN KEY (forecast_type_id) REFERENCES api.forecast_types (id) NOT valid;
+ALTER TABLE "public"."forecast"
+	ADD CONSTRAINT "forecast_type_id_fkey" FOREIGN KEY (type_id) REFERENCES public.sensor_types (id) NOT valid;
 
-ALTER TABLE "api"."forecast" validate CONSTRAINT "forecast_forecast_type_id_fkey";
+ALTER TABLE "public"."forecast" validate CONSTRAINT "forecast_type_id_fkey";
 
-ALTER TABLE "api"."forecast"
-	ADD CONSTRAINT "forecast_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES api.trees (id) NOT valid;
+ALTER TABLE "public"."forecast"
+	ADD CONSTRAINT "forecast_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES public.trees (id) NOT valid;
 
-ALTER TABLE "api"."forecast" validate CONSTRAINT "forecast_tree_id_fkey";
+ALTER TABLE "public"."forecast" validate CONSTRAINT "forecast_tree_id_fkey";
 
-ALTER TABLE "api"."nowcast"
-	ADD CONSTRAINT "nowcast_forecast_type_id_fkey" FOREIGN KEY (forecast_type_id) REFERENCES api.forecast_types (id) NOT valid;
+ALTER TABLE "public"."nowcast"
+	ADD CONSTRAINT "nowcast_type_id_fkey" FOREIGN KEY (type_id) REFERENCES public.sensor_types (id) NOT valid;
 
-ALTER TABLE "api"."nowcast" validate CONSTRAINT "nowcast_forecast_type_id_fkey";
+ALTER TABLE "public"."nowcast" validate CONSTRAINT "nowcast_type_id_fkey";
 
-ALTER TABLE "api"."nowcast"
-	ADD CONSTRAINT "nowcast_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES api.trees (id) NOT valid;
+ALTER TABLE "public"."nowcast"
+	ADD CONSTRAINT "nowcast_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES public.trees (id) NOT valid;
 
-ALTER TABLE "api"."nowcast" validate CONSTRAINT "nowcast_tree_id_fkey";
+ALTER TABLE "public"."nowcast" validate CONSTRAINT "nowcast_tree_id_fkey";
 
-ALTER TABLE "api"."shading"
-	ADD CONSTRAINT "shading_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES api.trees (id) NOT valid;
+ALTER TABLE "public"."shading"
+	ADD CONSTRAINT "shading_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES public.trees (id) NOT valid;
 
-ALTER TABLE "api"."shading" validate CONSTRAINT "shading_tree_id_fkey";
+ALTER TABLE "public"."shading" validate CONSTRAINT "shading_tree_id_fkey";
 
