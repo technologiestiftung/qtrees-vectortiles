@@ -4,6 +4,6 @@ INSERT INTO "public"."trees" ("id", "standortnr", "kennzeich", "namenr", "art_dt
 INSERT INTO "public"."sensor_types" ("id", "name")
 	VALUES (1, 'saugspannung_30cm'), (2, 'saugspannung_60cm'), (3, 'saugspannung_90cm'), (4, 'saugspannung_stamm');
 
-INSERT INTO "public"."forecast" ("tree_id", "forecast_type_id", "timestamp", "value", "created_at", "model_id")
+INSERT INTO "public"."forecast" ("tree_id", "type_id", "timestamp", "value", "created_at", "model_id")
 	VALUES ('00008100:0022e7ba', 1, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), ('00008100:0022e7ba', 2, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), ('00008100:0022e7ba', 3, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1'), ('00008100:0022e7ba', 4, '2022-07-06 10:29:08.456442', 0.2, '2022-07-06 10:29:08.456442', '1');
 
