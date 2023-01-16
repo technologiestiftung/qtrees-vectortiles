@@ -5,7 +5,6 @@
   "devDependencies": {
     "@saithodev/semantic-release-backmerge": "2.1.2",
     "@technologiestiftung/semantic-release-config": "1.2.0",
-    "postgres": "3.3.2",
-    "semantic-release": "19.0.3"
+    "postgres": "3.3.2"
   }
 }
