@@ -22,6 +22,7 @@ SELECT
 	trees. "lng" AS trees_lng,
 	trees. "created_at" AS trees_created_at,
 	trees. "updated_at" AS trees_updated_at,
+	trees. "street_tree" AS trees_street_tree,
 	_nowcast. "tree_id" AS nowcast_tree_id,
 	_nowcast. "nowcast_type_30cm" AS nowcast_type_30cm,
 	_nowcast. "nowcast_type_60cm" AS nowcast_type_60cm,
