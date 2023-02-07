@@ -1,3 +1,3 @@
-FROM qtrees-vectortiles-generator-base:test-macos
+FROM technologiestiftung/qtrees-vectortiles-generator-base:latest
 WORKDIR /usr/app
 ENTRYPOINT ["tail", "-f", "/dev/null"]
