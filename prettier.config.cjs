@@ -8,7 +8,7 @@ module.exports = {
 			files: ["*.yaml", "*.yml"],
 			options: {
 				tabWidth: 2,
-				singleQuote: true,
+				singleQuote: false,
 			},
 		},
 	],

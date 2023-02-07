@@ -1,0 +1,3 @@
+FROM qtrees-vectortiles-generator-base:test-macos
+WORKDIR /usr/app
+ENTRYPOINT ["tail", "-f", "/dev/null"]
