@@ -147,7 +147,7 @@ CREATE TABLE "public"."trees" (
 	"created_at" date,
 	"updated_at" date,
 	"street_tree" boolean,
-	"baumscheibe" REAL
+	"baumscheibe" real
 );
 
 CREATE TABLE "public"."weather" (
@@ -319,26 +319,26 @@ FROM
 		SELECT
 			nowcast_tree_id AS tree_id,
 			ARRAY_AGG(DISTINCT distinct_nowcast.forcast_type ORDER BY distinct_nowcast.forcast_type) AS nowcast_types_array,
-			(ARRAY_AGG(sensor_types_id)) [1] nowcast_type_30cm,
-			(ARRAY_AGG(sensor_types_id)) [2] nowcast_type_60cm,
-			(ARRAY_AGG(sensor_types_id)) [3] nowcast_type_90cm,
-			(ARRAY_AGG(sensor_types_id)) [4] nowcast_type_stamm,
-			(ARRAY_AGG(distinct_nowcast.nowcast_value)) [1] nowcast_values_30cm,
-			(ARRAY_AGG(distinct_nowcast.nowcast_value)) [2] nowcast_values_60cm,
-			(ARRAY_AGG(distinct_nowcast.nowcast_value)) [3] nowcast_values_90cm,
-			(ARRAY_AGG(distinct_nowcast.nowcast_value)) [4] nowcast_values_stamm,
-			(ARRAY_AGG(nowcast_model_id)) [1] nowcast_model_id_30cm,
-			(ARRAY_AGG(nowcast_model_id)) [2] nowcast_model_id_60cm,
-			(ARRAY_AGG(nowcast_model_id)) [3] nowcast_model_id_90cm,
-			(ARRAY_AGG(nowcast_model_id)) [4] nowcast_model_id_stamm,
-			(ARRAY_AGG(nowcast_created_at)) [1] nowcast_created_at_30cm,
-			(ARRAY_AGG(nowcast_created_at)) [2] nowcast_created_at_60cm,
-			(ARRAY_AGG(nowcast_created_at)) [3] nowcast_created_at_90cm,
-			(ARRAY_AGG(nowcast_created_at)) [4] nowcast_created_at_stamm,
-			(ARRAY_AGG(nowcast_timestamp)) [1] nowcast_timestamp_30cm,
-			(ARRAY_AGG(nowcast_timestamp)) [2] nowcast_timestamp_60cm,
-			(ARRAY_AGG(nowcast_timestamp)) [3] nowcast_timestamp_90cm,
-			(ARRAY_AGG(nowcast_timestamp)) [4] nowcast_timestamp_stamm
+			(ARRAY_AGG(sensor_types_id))[1] nowcast_type_30cm,
+			(ARRAY_AGG(sensor_types_id))[2] nowcast_type_60cm,
+			(ARRAY_AGG(sensor_types_id))[3] nowcast_type_90cm,
+			(ARRAY_AGG(sensor_types_id))[4] nowcast_type_stamm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[1] nowcast_values_30cm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[2] nowcast_values_60cm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[3] nowcast_values_90cm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[4] nowcast_values_stamm,
+			(ARRAY_AGG(nowcast_model_id))[1] nowcast_model_id_30cm,
+			(ARRAY_AGG(nowcast_model_id))[2] nowcast_model_id_60cm,
+			(ARRAY_AGG(nowcast_model_id))[3] nowcast_model_id_90cm,
+			(ARRAY_AGG(nowcast_model_id))[4] nowcast_model_id_stamm,
+			(ARRAY_AGG(nowcast_created_at))[1] nowcast_created_at_30cm,
+			(ARRAY_AGG(nowcast_created_at))[2] nowcast_created_at_60cm,
+			(ARRAY_AGG(nowcast_created_at))[3] nowcast_created_at_90cm,
+			(ARRAY_AGG(nowcast_created_at))[4] nowcast_created_at_stamm,
+			(ARRAY_AGG(nowcast_timestamp))[1] nowcast_timestamp_30cm,
+			(ARRAY_AGG(nowcast_timestamp))[2] nowcast_timestamp_60cm,
+			(ARRAY_AGG(nowcast_timestamp))[3] nowcast_timestamp_90cm,
+			(ARRAY_AGG(nowcast_timestamp))[4] nowcast_timestamp_stamm
 		FROM ( SELECT DISTINCT ON (n.tree_id, f.name)
 				n.id AS nowcast_id,
 				n.timestamp AS nowcast_timestamp,
@@ -356,7 +356,7 @@ FROM
 				f.name,
 				n.timestamp DESC) distinct_nowcast
 		GROUP BY
-			nowcast_tree_id) AS _nowcast ON trees.id = _nowcast.tree_id with data;
+			nowcast_tree_id) AS _nowcast ON trees.id = _nowcast.tree_id WITH data;
 
 CREATE ROLE web_anon nologin;
 
@@ -368,9 +368,9 @@ CREATE ROLE authenticator noinherit LOGIN PASSWORD 'mysecretpassword';
 
 GRANT web_anon TO authenticator;
 
-grant USAGE on schema public to web_anon;
-grant SELECT on "public".trees to web_anon;
+GRANT USAGE ON SCHEMA public TO web_anon;
 
-grant SELECT on "public".vector_tiles to web_anon;
-create role authenticator noinherit login password 'mysecretpassword';
-grant web_anon to authenticator;
+GRANT SELECT ON "public".trees TO web_anon;
+
+GRANT SELECT ON "public".vector_tiles TO web_anon;
+
