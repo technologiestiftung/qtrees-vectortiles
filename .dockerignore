@@ -5,13 +5,11 @@ docker-compose*.yml
 Dockerfile*
 .env
 .vscode
-.nvmrc
 .github
 .all-contributorsrc
 CHANGELOG.md
 LICENSE
 nightly-release.txt
-package*.json
 prettier.config.cjs
 render.yaml
 release.config.*js

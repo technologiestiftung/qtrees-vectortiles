@@ -10,14 +10,19 @@ mkdir -p "$TMP_DIR"
 echo "system: Removing old geojson files..."
 rm -f "$TMP_DIR"/out.full.geojson || true
 
-echo "ogr2ogr: Creating geojson file from sql query"
-ogr2ogr \
-  -f GeoJSON "$TMP_DIR"/out.full.geojson \
-  "PG:host='$POSTGRES_HOST' \
-  dbname='$POSTGRES_DB' \
-  user='$POSTGRES_USER' \
-  password='$POSTGRES_PASSWORD'" \
-  -sql "@$GITHUB_WORKSPACE/ogr2ogr.sql"
+echo "$GEOJSON_OUTPUT_DIR"
+echo "$GEOJSON_OUTPUT_FILENAME"
+echo "$POSTGREST_API_URL"
+echo "$POSTGRES_MATERIALIZE_VIEW_NAME"
+echo "ts-node: Creating geojson file from api request..."
+ts-node "$GITHUB_WORKSPACE"/generate-geojson/index.ts
+# ogr2ogr \
+#   -f GeoJSON "$TMP_DIR"/out.full.geojson \
+#   "PG:host='$POSTGRES_HOST' \
+#   dbname='$POSTGRES_DB' \
+#   user='$POSTGRES_USER' \
+#   password='$POSTGRES_PASSWORD'" \
+#   -sql "@$GITHUB_WORKSPACE/ogr2ogr.sql"
 
 echo "tippecanoe: Creating tileset..."
 tippecanoe \
