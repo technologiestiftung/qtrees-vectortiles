@@ -43,6 +43,7 @@ ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION} && . "$NVM_DIR/nvm.sh" && nvm use ${NODE_VERSION} && . "$NVM_DIR/nvm.sh" && nvm alias default ${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/${NODE_VERSION}/bin/:${PATH}"
 COPY package*.json ./
+COPY tsconfig.json ./
 # RUN node --version
 # RUN npm --version
 RUN npm ci --quiet
