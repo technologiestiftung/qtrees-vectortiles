@@ -15,7 +15,7 @@ echo "$GEOJSON_OUTPUT_FILENAME"
 echo "$POSTGREST_API_URL"
 echo "$POSTGRES_MATERIALIZE_VIEW_NAME"
 echo "ts-node: Creating geojson file from api request..."
-ts-node "$GITHUB_WORKSPACE"/generate-geojson/index.ts
+npx ts-node --esm "$GITHUB_WORKSPACE"/generate-geojson/index.ts
 # ogr2ogr \
 #   -f GeoJSON "$TMP_DIR"/out.full.geojson \
 #   "PG:host='$POSTGRES_HOST' \
