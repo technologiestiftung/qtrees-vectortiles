@@ -5,11 +5,14 @@ env:
   TILESET_NAME: trees.mbtiles
   TILESET_DIR: /tilesets
   TMP_DIR: /tmp
+  GEOJSON_OUTPUT_DIR: /tmp
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
   AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-
+  POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
+  POSTGREST_API_URL: "http://localhost:3000"
+  GEOJSON_OUTPUT_FILENAME: "out.full.geojson"
   DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.5
 on:
   push:
@@ -34,7 +37,7 @@ jobs:
     steps:
       - name: Checkout technologiestiftung/qtrees-vectortiles-generator
         uses: actions/checkout@v3
-      - name: test docker compose
+      - name: base image test via docker compose
         env:
           GITHUB_TOKEN: ${{secrets.GH_PA_TOKEN}}
         run: |
@@ -110,9 +113,9 @@ jobs:
           TILESET_DIR: ${{env.TILESET_DIR}}
           TILESET_NAME: ${{env.TILESET_NAME}}
           TMP_DIR: ${{env.TMP_DIR}}
-          POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
-          POSTGREST_API_URL: "http://localhost:3000"
-          GEOJSON_OUTPUT_FILENAME: "out.full.geojson"
+          POSTGRES_MATERIALIZE_VIEW_NAME: ${{env.POSTGRES_MATERIALIZE_VIEW_NAME}}
+          POSTGREST_API_URL: ${{env.POSTGREST_API_URL}}
+          GEOJSON_OUTPUT_FILENAME: ${{env.GEOJSON_OUTPUT_FILENAME}}
           GEOJSON_OUTPUT_DIR: ${{env.TMP_DIR}}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
