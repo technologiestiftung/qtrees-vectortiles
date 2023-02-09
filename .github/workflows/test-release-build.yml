@@ -125,7 +125,12 @@ jobs:
         run: |
           echo "Running the generator"
           ./generator.sh
-
+      - name: Tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 5
+        with:
+          limit-access-to-actor: true
   release:
     name: Release
     runs-on: ubuntu-latest
