@@ -8,9 +8,9 @@ mkdir -p "$TILESET_DIR"
 mkdir -p "$TMP_DIR"
 
 echo "system: Removing old geojson files..."
-rm -f "$TMP_DIR"/out.full.geojson || true
+rm -f "$TMP_DIR/$GEOJSON_OUTPUT_FILENAME" || true
 
-echo "$GEOJSON_OUTPUT_DIR"
+echo "$TMP_DIR"
 echo "$GEOJSON_OUTPUT_FILENAME"
 echo "$POSTGREST_API_URL"
 echo "$POSTGRES_MATERIALIZE_VIEW_NAME"

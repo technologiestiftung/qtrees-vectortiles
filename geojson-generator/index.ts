@@ -1,10 +1,11 @@
 import fs from "node:fs";
 
-const GEOJSON_OUTPUT_DIR = process.env.GEOJSON_OUTPUT_DIR;
+const TMP_DIR = process.env.TMP_DIR;
 const GEOJSON_OUTPUT_FILENAME = process.env.GEOJSON_OUTPUT_FILENAME;
 const POSTGREST_API_URL = process.env.POSTGREST_API_URL;
 const POSTGRES_MATERIALIZE_VIEW_NAME =
 	process.env.POSTGRES_MATERIALIZE_VIEW_URL;
+
 if (!POSTGRES_MATERIALIZE_VIEW_NAME) {
 	throw new Error("POSTGRES_MATERIALIZE_VIEW_NAME env var not defined");
 }
@@ -12,8 +13,8 @@ if (!POSTGREST_API_URL) {
 	throw new Error("POSTGREST_API_URL env var not defined");
 }
 
-if (!GEOJSON_OUTPUT_DIR) {
-	throw new Error("GEOJSON_OUTPUT_DIR env var not defined");
+if (!TMP_DIR) {
+	throw new Error("TMP_DIR env var not defined");
 }
 
 if (!GEOJSON_OUTPUT_FILENAME) {
@@ -83,7 +84,7 @@ async function generateGeoJson(trees: Tree[]) {
 	};
 
 	for (const tree of trees) {
-		const [longitude, latitude, _elevation] = tree.trees_geometry.coordinates;
+		const [longitude, latitude] = tree.trees_geometry.coordinates;
 		const feature = {
 			type: "Feature",
 			properties: { ...tree },
@@ -180,7 +181,10 @@ async function main() {
 		}
 
 		const geojson = await generateGeoJson(trees);
-		fs.writeFileSync("out.full.geojson", JSON.stringify(geojson));
+		fs.writeFileSync(
+			`${TMP_DIR}/${GEOJSON_OUTPUT_FILENAME}`,
+			JSON.stringify(geojson)
+		);
 	} catch (error) {
 		console.error(error);
 	}
