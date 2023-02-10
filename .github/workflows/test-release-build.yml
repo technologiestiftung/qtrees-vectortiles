@@ -131,6 +131,10 @@ jobs:
         timeout-minutes: 5
         with:
           limit-access-to-actor: true
+      - name: Run node tests
+        env:
+          TEST_GEOJSON_FILE_PATH: ${{env.TMP_DIR}}/${{env.GEOJSON_OUTPUT_FILENAME}}
+        run: npm run test:ci
   release:
     name: Release
     runs-on: ubuntu-latest
