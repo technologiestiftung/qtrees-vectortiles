@@ -5,7 +5,7 @@ module.exports = {
 		[
 			"@saithodev/semantic-release-backmerge",
 			{
-				branch: ["staging"],
+        branch: [{from: "main", to: "staging"}],
 				backmergeStrategy: "merge",
 			},
 		],

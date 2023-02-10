@@ -1,0 +1,2 @@
+REFRESH MATERIALIZED VIEW vector_tiles;
+

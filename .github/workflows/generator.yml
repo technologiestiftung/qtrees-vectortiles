@@ -24,15 +24,12 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
       env:
-        POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        POSTGRES_PORT: '5432'
-
         TILESET_DIR: /tilesets
         TILESET_NAME: trees.mbtiles
         TMP_DIR: /tmp
+        GEOJSON_OUTPUT_FILENAME: out.full.geojson
+        POSTGREST_API_URL: ${{ secrets.POSTGREST_API_URL }}
+        POSTGRES_MATERIALIZE_VIEW_NAME: ${{ secrets.POSTGRES_MATERIALIZE_VIEW_NAME }}
 
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -81,7 +78,7 @@ jobs:
       #       limit-access-to-actor: true
       #   # now notify the render to use the new tileset
       #   # by downloading it and restarting the server
-      - name: 'run render webhook'
+      - name: "run render webhook"
         # if: github.event_name == 'release' && github.event.action == 'published'
         run: |
           curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}

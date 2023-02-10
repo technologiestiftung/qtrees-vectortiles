@@ -1,0 +1,7 @@
+@api = http://localhost:3000
+GET {{api}}/vector_tiles
+
+###
+HEAD {{api}}/vector_tiles
+Range-Unit: items
+Prefer: count=exact
