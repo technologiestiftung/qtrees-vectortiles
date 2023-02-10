@@ -13,7 +13,7 @@ env:
   POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
   POSTGREST_API_URL: "http://postgrest:3000"
   GEOJSON_OUTPUT_FILENAME: "out.full.geojson"
-  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
 on:
   push:
     branches: [main, staging]
@@ -61,7 +61,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     container:
-      image: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+      image: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
     services:
       postgrest:
         image: postgrest/postgrest:v10.1.2
