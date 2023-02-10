@@ -146,7 +146,8 @@ CREATE TABLE "public"."trees" (
 	"lng" double precision,
 	"created_at" date,
 	"updated_at" date,
-	"street_tree" boolean
+	"street_tree" boolean,
+	"baumscheibe" real
 );
 
 CREATE TABLE "public"."weather" (
@@ -263,4 +264,113 @@ ALTER TABLE "public"."shading"
 	ADD CONSTRAINT "shading_tree_id_fkey" FOREIGN KEY (tree_id) REFERENCES public.trees (id) NOT valid;
 
 ALTER TABLE "public"."shading" validate CONSTRAINT "shading_tree_id_fkey";
+
+CREATE MATERIALIZED VIEW public.vector_tiles AS
+SELECT
+	trees.id AS trees_id,
+	trees.standortnr AS trees_standortnr,
+	trees.kennzeich AS trees_kennzeich,
+	trees.namenr AS trees_namenr,
+	trees.art_dtsch AS trees_art_dtsch,
+	trees.art_bot AS trees_art_bot,
+	trees.gattung_deutsch AS trees_gattung_deutsch,
+	trees.gattung AS trees_gattung,
+	trees.strname AS trees_strname,
+	trees.hausnr AS trees_hausnr,
+	trees.pflanzjahr AS trees_pflanzjahr,
+	trees.standalter AS trees_standalter,
+	trees.stammumfg AS trees_stammumfg,
+	trees.baumhoehe AS trees_baumhoehe,
+	trees.bezirk AS trees_bezirk,
+	trees.eigentuemer AS trees_eigentuemer,
+	trees.zusatz AS trees_zusatz,
+	trees.kronedurch AS trees_kronedurch,
+	trees.geometry AS trees_geometry,
+	trees.lat AS trees_lat,
+	trees.lng AS trees_lng,
+	trees.created_at AS trees_created_at,
+	trees.updated_at AS trees_updated_at,
+	trees.street_tree AS trees_street_tree,
+	trees.baumscheibe AS trees_baumscheibe,
+	_nowcast.tree_id AS nowcast_tree_id,
+	_nowcast.nowcast_type_30cm AS nowcast_type_30cm,
+	_nowcast.nowcast_type_60cm AS nowcast_type_60cm,
+	_nowcast.nowcast_type_90cm AS nowcast_type_90cm,
+	_nowcast.nowcast_type_stamm AS nowcast_type_stamm,
+	_nowcast.nowcast_timestamp_30cm AS nowcast_timestamp_30cm,
+	_nowcast.nowcast_timestamp_60cm AS nowcast_timestamp_60cm,
+	_nowcast.nowcast_timestamp_90cm AS nowcast_timestamp_90cm,
+	_nowcast.nowcast_timestamp_stamm AS nowcast_timestamp_stamm,
+	_nowcast.nowcast_values_30cm AS nowcast_values_30cm,
+	_nowcast.nowcast_values_60cm AS nowcast_values_60cm,
+	_nowcast.nowcast_values_90cm AS nowcast_values_90cm,
+	_nowcast.nowcast_values_stamm AS nowcast_values_stamm,
+	_nowcast.nowcast_created_at_30cm AS nowcast_created_at_30cm,
+	_nowcast.nowcast_created_at_60cm AS nowcast_created_at_60cm,
+	_nowcast.nowcast_created_at_90cm AS nowcast_created_at_90cm,
+	_nowcast.nowcast_created_at_stamm AS nowcast_created_at_stamm,
+	_nowcast.nowcast_model_id_30cm AS nowcast_model_id_30cm,
+	_nowcast.nowcast_model_id_60cm AS nowcast_model_id_60cm,
+	_nowcast.nowcast_model_id_90cm AS nowcast_model_id_90cm,
+	_nowcast.nowcast_model_id_stamm AS nowcast_model_id_4
+FROM
+	public.trees
+	LEFT JOIN (
+		SELECT
+			nowcast_tree_id AS tree_id,
+			ARRAY_AGG(DISTINCT distinct_nowcast.forcast_type ORDER BY distinct_nowcast.forcast_type) AS nowcast_types_array,
+			(ARRAY_AGG(sensor_types_id))[1] nowcast_type_30cm,
+			(ARRAY_AGG(sensor_types_id))[2] nowcast_type_60cm,
+			(ARRAY_AGG(sensor_types_id))[3] nowcast_type_90cm,
+			(ARRAY_AGG(sensor_types_id))[4] nowcast_type_stamm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[1] nowcast_values_30cm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[2] nowcast_values_60cm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[3] nowcast_values_90cm,
+			(ARRAY_AGG(distinct_nowcast.nowcast_value))[4] nowcast_values_stamm,
+			(ARRAY_AGG(nowcast_model_id))[1] nowcast_model_id_30cm,
+			(ARRAY_AGG(nowcast_model_id))[2] nowcast_model_id_60cm,
+			(ARRAY_AGG(nowcast_model_id))[3] nowcast_model_id_90cm,
+			(ARRAY_AGG(nowcast_model_id))[4] nowcast_model_id_stamm,
+			(ARRAY_AGG(nowcast_created_at))[1] nowcast_created_at_30cm,
+			(ARRAY_AGG(nowcast_created_at))[2] nowcast_created_at_60cm,
+			(ARRAY_AGG(nowcast_created_at))[3] nowcast_created_at_90cm,
+			(ARRAY_AGG(nowcast_created_at))[4] nowcast_created_at_stamm,
+			(ARRAY_AGG(nowcast_timestamp))[1] nowcast_timestamp_30cm,
+			(ARRAY_AGG(nowcast_timestamp))[2] nowcast_timestamp_60cm,
+			(ARRAY_AGG(nowcast_timestamp))[3] nowcast_timestamp_90cm,
+			(ARRAY_AGG(nowcast_timestamp))[4] nowcast_timestamp_stamm
+		FROM ( SELECT DISTINCT ON (n.tree_id, f.name)
+				n.id AS nowcast_id,
+				n.timestamp AS nowcast_timestamp,
+				n.tree_id AS nowcast_tree_id,
+				n.value AS nowcast_value,
+				n.created_at AS nowcast_created_at,
+				n.model_id AS nowcast_model_id,
+				f.name AS forcast_type,
+				f.id AS sensor_types_id
+			FROM
+				public.nowcast n
+				JOIN public.sensor_types f ON n.type_id = f.id
+			ORDER BY
+				n.tree_id,
+				f.name,
+				n.timestamp DESC) distinct_nowcast
+		GROUP BY
+			nowcast_tree_id) AS _nowcast ON trees.id = _nowcast.tree_id WITH data;
+
+CREATE ROLE web_anon nologin;
+
+GRANT usage ON SCHEMA public TO web_anon;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_anon;
+
+CREATE ROLE authenticator noinherit LOGIN PASSWORD 'mysecretpassword';
+
+GRANT web_anon TO authenticator;
+
+GRANT USAGE ON SCHEMA public TO web_anon;
+
+GRANT SELECT ON "public".trees TO web_anon;
+
+GRANT SELECT ON "public".vector_tiles TO web_anon;
 

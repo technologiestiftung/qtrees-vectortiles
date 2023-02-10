@@ -19,20 +19,17 @@ jobs:
 
     environment: ${{ github.event.client_payload.environment }}
     container:
-      image: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+      image: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
       credentials:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
       env:
-        POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        POSTGRES_PORT: '5432'
-
         TILESET_DIR: /tilesets
         TILESET_NAME: trees.mbtiles
         TMP_DIR: /tmp
+        GEOJSON_OUTPUT_FILENAME: out.full.geojson
+        POSTGREST_API_URL: ${{ secrets.POSTGREST_API_URL }}
+        POSTGRES_MATERIALIZE_VIEW_NAME: ${{ secrets.POSTGRES_MATERIALIZE_VIEW_NAME }}
 
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -45,6 +42,8 @@ jobs:
         run: mkdir -p $TILESET_DIR
       - name: Checkout source repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ fromJSON('{"production":"main","staging":"staging"}')[github.event.client_payload.environment] || github.event.client_payload.environment }}
       - name: Run the generator
         id: generator
         run: |
@@ -81,7 +80,7 @@ jobs:
       #       limit-access-to-actor: true
       #   # now notify the render to use the new tileset
       #   # by downloading it and restarting the server
-      - name: 'run render webhook'
+      - name: "run render webhook"
         # if: github.event_name == 'release' && github.event.action == 'published'
         run: |
           curl -X POST ${{ secrets.RENDER_WEBHOOK_URL }}

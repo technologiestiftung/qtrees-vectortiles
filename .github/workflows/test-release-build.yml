@@ -5,23 +5,26 @@ env:
   TILESET_NAME: trees.mbtiles
   TILESET_DIR: /tilesets
   TMP_DIR: /tmp
+  GEOJSON_OUTPUT_DIR: /tmp
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
   AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-
-  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+  POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
+  POSTGREST_API_URL: "http://postgrest:3000"
+  GEOJSON_OUTPUT_FILENAME: "out.full.geojson"
+  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
 on:
   push:
     branches: [main, staging]
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
     branches: [main, staging]
   workflow_dispatch:
     inputs:
       debug_enabled:
-        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        description: "Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)"
         required: false
         default: false
   release:
@@ -30,11 +33,11 @@ on:
 jobs:
   test:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout technologiestiftung/qtrees-vectortiles-generator
         uses: actions/checkout@v3
-      - name: test docker compose
+      - name: base image test via docker compose
         env:
           GITHUB_TOKEN: ${{secrets.GH_PA_TOKEN}}
         run: |
@@ -56,10 +59,19 @@ jobs:
     needs:
       - test
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
-      image: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+      image: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
     services:
+      postgrest:
+        image: postgrest/postgrest:v10.1.2
+        env:
+          PGRST_DB_URI: "postgres://postgres:postgres@postgres:5432/postgres"
+          PGRST_OPENAPI_SERVER_PROXY_URI: "http://127.0.0.1:3000"
+          PGRST_DB_ANON_ROLE: "web_anon"
+          PGRST_DB_MAX_ROWS: "50"
+        ports:
+          - "3000:3000"
       postgres:
         image: postgis/postgis:14-3.2
         env:
@@ -68,7 +80,7 @@ jobs:
           POSTGRES_DB: ${{env.POSTGRES_DB}}
 
         ports:
-          - 5432:5432
+          - "5432:5432"
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -79,7 +91,7 @@ jobs:
         uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
 
       - run: npm ci
 
@@ -101,6 +113,10 @@ jobs:
           TILESET_DIR: ${{env.TILESET_DIR}}
           TILESET_NAME: ${{env.TILESET_NAME}}
           TMP_DIR: ${{env.TMP_DIR}}
+          POSTGRES_MATERIALIZE_VIEW_NAME: ${{env.POSTGRES_MATERIALIZE_VIEW_NAME}}
+          POSTGREST_API_URL: ${{env.POSTGREST_API_URL}}
+          GEOJSON_OUTPUT_FILENAME: ${{env.GEOJSON_OUTPUT_FILENAME}}
+          GEOJSON_OUTPUT_DIR: ${{env.TMP_DIR}}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{env.AWS_DEFAULT_REGION}}
@@ -109,7 +125,16 @@ jobs:
         run: |
           echo "Running the generator"
           ./generator.sh
-
+      - name: Tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 5
+        with:
+          limit-access-to-actor: true
+      - name: Run node tests
+        env:
+          TEST_GEOJSON_FILE_PATH: ${{env.TMP_DIR}}/${{env.GEOJSON_OUTPUT_FILENAME}}
+        run: npm run test:ci
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -126,7 +151,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
       - name: Install dependencies
         run: npm ci
       - name: Release
