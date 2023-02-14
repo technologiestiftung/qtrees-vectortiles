@@ -1,16 +1,16 @@
 version: "3.9"
 services:
-  postgrest:
-    image: postgrest/postgrest:v10.1.2
-    ports:
-      - "3000:3000"
-    environment:
-      PGRST_DB_URI: "postgres://postgres:postgres@postgres:5432/postgres"
-      PGRST_OPENAPI_SERVER_PROXY_URI: "http://127.0.0.1:3000"
-      PGRST_DB_ANON_ROLE: "web_anon"
-      PGRST_DB_MAX_ROWS: "50"
-    depends_on:
-      - postgres
+  # postgrest:
+  #   image: postgrest/postgrest:v10.1.2
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     PGRST_DB_URI: "postgres://postgres:postgres@postgres:5432/postgres"
+  #     PGRST_OPENAPI_SERVER_PROXY_URI: "http://127.0.0.1:3000"
+  #     PGRST_DB_ANON_ROLE: "web_anon"
+  #     PGRST_DB_MAX_ROWS: "50"
+  #   depends_on:
+  #     - postgres
   postgres:
     image: postgis/postgis:14-3.2
     environment:
@@ -33,23 +33,31 @@ services:
       timeout: "5s"
       retries: 5
   generator:
-    # platform: linux/amd64
+
     build:
+      args:
+        BASE_IMAGE: technologiestiftung/qtrees-vectortiles_base:2.6.1
       context: .
       dockerfile: Dockerfile.generator
     environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      GITHUB_WORKSPACE: /usr/app
-      TILESET_NAME: trees.mbtiles
-      GITHUB_TOKEN: "123"
-    entrypoint: [ "tail", "-f", "/dev/null" ]
+      POSTGRES_HOST: "${POSTGRES_HOST}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      WORKDIR: "/usr/app"
+      TILESET_NAME: "${TILESET_NAME}"
+      TILESET_DIR: "${TILESET_DIR}"
+      TMP_DIR: "${TMP_DIR}"
+      GEOJSON_OUTPUT_FILENAME: "${GEOJSON_OUTPUT_FILENAME}"
+      POSTGRES_MATERIALIZE_VIEW_NAME: "${POSTGRES_MATERIALIZE_VIEW_NAME}"
+      AWS_DEFAULT_REGION: "${AWS_DEFAULT_REGION}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_BUCKET: "${AWS_BUCKET}"
     depends_on:
       postgres:
         condition: service_healthy
     volumes:
-      - ./_data/tilesets:/tilesets
-      - ./:/usr/app
-      - ./_data/temp:/tmp
+      - /tilesets:/tilesets
+      # - ./:/usr/app
+      - /tmp:/tmp
