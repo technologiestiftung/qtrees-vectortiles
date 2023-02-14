@@ -1,41 +1,41 @@
 {
-  "projectName": "qtrees-vectortiles-generator",
-  "projectOwner": "technologiestiftung",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 128,
-  "commit": true,
-  "commitConvention": "angular",
-  "contributors": [
-    {
-      "login": "ff6347",
-      "name": "Fabian Morón Zirfas",
-      "avatar_url": "https://avatars.githubusercontent.com/u/315106?v=4",
-      "profile": "https://fabianmoronzirfas.me",
-      "contributions": [
-        "code",
-        "design",
-        "ideas",
-        "infra",
-        "test"
-      ]
-    },
-    {
-      "login": "juan-carlos-tsb",
-      "name": "juan-carlos-tsb",
-      "avatar_url": "https://avatars.githubusercontent.com/u/91873654?v=4",
-      "profile": "https://www.technologiestiftung-berlin.de/de/citylab/",
-      "contributions": [
-        "code",
-        "design",
-        "review",
-        "ideas"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7,
-  "skipCi": true
+	"projectName": "qtrees-vectortiles",
+	"projectOwner": "technologiestiftung",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"files": [
+		"README.md"
+	],
+	"imageSize": 128,
+	"commit": true,
+	"commitConvention": "angular",
+	"contributors": [
+		{
+			"login": "ff6347",
+			"name": "Fabian Morón Zirfas",
+			"avatar_url": "https://avatars.githubusercontent.com/u/315106?v=4",
+			"profile": "https://fabianmoronzirfas.me",
+			"contributions": [
+				"code",
+				"design",
+				"ideas",
+				"infra",
+				"test"
+			]
+		},
+		{
+			"login": "juan-carlos-tsb",
+			"name": "juan-carlos-tsb",
+			"avatar_url": "https://avatars.githubusercontent.com/u/91873654?v=4",
+			"profile": "https://www.technologiestiftung-berlin.de/de/citylab/",
+			"contributions": [
+				"code",
+				"design",
+				"review",
+				"ideas"
+			]
+		}
+	],
+	"contributorsPerLine": 7,
+	"skipCi": true
 }

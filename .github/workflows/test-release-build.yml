@@ -13,7 +13,7 @@ env:
   POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
   POSTGREST_API_URL: "http://postgrest:3000"
   GEOJSON_OUTPUT_FILENAME: "out.full.geojson"
-  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
+  DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles_base:latest
 on:
   push:
     branches: [main, staging]
@@ -35,13 +35,13 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout technologiestiftung/qtrees-vectortiles-generator
+      - name: Checkout technologiestiftung/qtrees-vectortiles
         uses: actions/checkout@v3
       - name: base image test via docker compose
         env:
           GITHUB_TOKEN: ${{secrets.GH_PA_TOKEN}}
         run: |
-          docker build --tag qtrees-vectortiles-generator-base:test --file ./Dockerfile.base .
+          docker build --tag qtrees-vectortiles_base:test --file ./Dockerfile.base .
           docker compose --file docker-compose.yml --file docker-compose.test.yml up --abort-on-container-exit --no-color --exit-code-from mbtileserver
       - name: Tmate session
         if: ${{ failure() }}
@@ -61,7 +61,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     container:
-      image: technologiestiftung/qtrees-vectortiles-generator-base:2.6.0-rc.2
+      image: technologiestiftung/qtrees-vectortiles_base:latest
     services:
       postgrest:
         image: postgrest/postgrest:v10.1.2
@@ -87,7 +87,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Checkout technologiestiftung/qtrees-vectortiles-generator
+      - name: Checkout technologiestiftung/qtrees-vectortiles
         uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -172,7 +172,7 @@ jobs:
         id: meta_base
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.IMAGE_NAME }}-base
+          images: ${{ env.IMAGE_NAME }}_base
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -210,7 +210,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile.server
           build-args: |
             BASE_IMAGE=${{ steps.meta_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
@@ -243,23 +243,32 @@ jobs:
         id: metaghcr_base
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-base
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}_base
           tags: |
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-      - name: Extract metadata (tags, labels) for Docker
-        id: metaghcr
+      - name: Extract metadata (tags, labels) for Docker server
+        id: metaghcr_server
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}_server
           tags: |
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-
+      - name: Extract metadata (tags, labels) for Docker generator
+        id: metaghcr_generator
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}_generator
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
       # - name: set BASE_IMAGE
       #   run: echo "BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}" >> $GITHUB_ENV
 
@@ -275,9 +284,19 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: ./Dockerfile.server
           build-args: |
             BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.metaghcr.outputs.tags }}
-          labels: ${{ steps.metaghcr.outputs.labels }}
+          tags: ${{ steps.metaghcr_server.outputs.tags }}
+          labels: ${{ steps.metaghcr_server.outputs.labels }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.generator
+          build-args: |
+            BASE_IMAGE=${{ steps.metaghcr_base.outputs.tags }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.metaghcr_generator.outputs.tags }}
+          labels: ${{ steps.metaghcr_generator.outputs.labels }}
