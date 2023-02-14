@@ -172,8 +172,8 @@ jobs:
       - name: Build base
         uses: docker/build-push-action@v3
         with:
-          load: true
-          platforms: linux/amd64,linux/arm64
+          # load: true
+          # platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.base
           push: ${{ github.event_name != 'pull_request' }}
@@ -182,8 +182,8 @@ jobs:
       - name: Build Server
         uses: docker/build-push-action@v3
         with:
-          load: true
-          platforms: linux/amd64,linux/arm64
+          # load: true
+          # platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.server
           build-args: |
@@ -194,8 +194,8 @@ jobs:
       - name: Build Generator
         uses: docker/build-push-action@v3
         with:
-          load: true
-          platforms: linux/amd64,linux/arm64
+          # load: true
+          # platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.generator
           build-args: |
@@ -262,8 +262,8 @@ jobs:
       - name: Build base and push
         uses: docker/build-push-action@v3
         with:
-          load: true
-          platforms: linux/amd64,linux/arm64
+          # load: true
+          # platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.base
           push: ${{ github.event_name != 'pull_request' }}
@@ -272,8 +272,8 @@ jobs:
       - name: Build server and push
         uses: docker/build-push-action@v3
         with:
-          load: true
-          platforms: linux/amd64,linux/arm64
+          # load: true
+          # platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.server
           build-args: |
@@ -284,8 +284,8 @@ jobs:
       - name: Build generator and push
         uses: docker/build-push-action@v3
         with:
-          load: true
-          platforms: linux/amd64,linux/arm64
+          # load: true
+          # platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.generator
           build-args: |
