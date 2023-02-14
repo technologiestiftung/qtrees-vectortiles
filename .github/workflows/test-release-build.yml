@@ -101,7 +101,7 @@ jobs:
       # POSTGRES_DB: ${{env.POSTGRES_DB}}
       # POSTGRES_HOST: ${{env.POSTGRES_HOST}}
       # POSTGRES_PORT: ${{env.POSTGRES_PORT}}
-      - name: test generator
+      - name: Run generator using docker compose
         env:
           # POSTGRES_HOST: ${{env.POSTGRES_HOST}}
           # POSTGRES_DB: ${{env.POSTGRES_DB}}
@@ -120,7 +120,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{env.AWS_DEFAULT_REGION}}
           AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
-      - name: Run generator using docker compose
         run: |
           docker compose -f docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
         # run: |
