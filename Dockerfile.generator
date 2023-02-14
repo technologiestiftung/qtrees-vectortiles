@@ -18,5 +18,5 @@ ENV AWS_ACCESS_KEY_ID ""
 ENV AWS_SECRET_ACCESS_KEY ""
 
 WORKDIR $WORKDIR
-COPY generaor.sh generator.sh
-ENTRYPOINT ["generaor.sh"]
+COPY generator.sh generator.sh
+ENTRYPOINT ["generator.sh"]
