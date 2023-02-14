@@ -11,8 +11,7 @@ env:
   AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
-  POSTGREST_API_URL: "http://postgrest:3000"
-  GEOJSON_OUTPUT_FILENAME: "out.full.geojson"
+  GEOJSON_OUTPUT_FILENAME: "trees.geo.json"
   DEFAULT_BASE_IMAGE: technologiestiftung/qtrees-vectortiles_base:latest
 on:
   push:
@@ -60,32 +59,32 @@ jobs:
       - test
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
-    container:
-      image: technologiestiftung/qtrees-vectortiles_base:latest
-    services:
-      postgrest:
-        image: postgrest/postgrest:v10.1.2
-        env:
-          PGRST_DB_URI: "postgres://postgres:postgres@postgres:5432/postgres"
-          PGRST_OPENAPI_SERVER_PROXY_URI: "http://127.0.0.1:3000"
-          PGRST_DB_ANON_ROLE: "web_anon"
-          PGRST_DB_MAX_ROWS: "50"
-        ports:
-          - "3000:3000"
-      postgres:
-        image: postgis/postgis:14-3.2
-        env:
-          POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
-          POSTGRES_USER: ${{env.POSTGRES_USER}}
-          POSTGRES_DB: ${{env.POSTGRES_DB}}
+    # container:
+    #   image: technologiestiftung/qtrees-vectortiles_base:latest
+    # services:
+    #   postgrest:
+    #     image: postgrest/postgrest:v10.1.2
+    #     env:
+    #       PGRST_DB_URI: "postgres://postgres:postgres@postgres:5432/postgres"
+    #       PGRST_OPENAPI_SERVER_PROXY_URI: "http://127.0.0.1:3000"
+    #       PGRST_DB_ANON_ROLE: "web_anon"
+    #       PGRST_DB_MAX_ROWS: "50"
+    #     ports:
+    #       - "3000:3000"
+    #   postgres:
+    #     image: postgis/postgis:14-3.2
+    #     env:
+    #       POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
+    #       POSTGRES_USER: ${{env.POSTGRES_USER}}
+    #       POSTGRES_DB: ${{env.POSTGRES_DB}}
 
-        ports:
-          - "5432:5432"
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    #     ports:
+    #       - "5432:5432"
+    #     options: >-
+    #       --health-cmd pg_isready
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
     steps:
       - name: Checkout technologiestiftung/qtrees-vectortiles
         uses: actions/checkout@v3
@@ -95,13 +94,13 @@ jobs:
 
       - run: npm ci
 
-      - run: node __tests__/init-generator-test.js
-        # env:
-        # POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
-        # POSTGRES_USER: ${{env.POSTGRES_USER}}
-        # POSTGRES_DB: ${{env.POSTGRES_DB}}
-        # POSTGRES_HOST: ${{env.POSTGRES_HOST}}
-        # POSTGRES_PORT: ${{env.POSTGRES_PORT}}
+      # - run: node __tests__/init-generator-test.js
+      # env:
+      # POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
+      # POSTGRES_USER: ${{env.POSTGRES_USER}}
+      # POSTGRES_DB: ${{env.POSTGRES_DB}}
+      # POSTGRES_HOST: ${{env.POSTGRES_HOST}}
+      # POSTGRES_PORT: ${{env.POSTGRES_PORT}}
       - name: test generator
         env:
           # POSTGRES_HOST: ${{env.POSTGRES_HOST}}
@@ -121,10 +120,12 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{env.AWS_DEFAULT_REGION}}
           AWS_BUCKET: ${{ secrets.AWS_TEST_BUCKET }}
-
+      - name: Run generator using docker compose
         run: |
-          echo "Running the generator"
-          ./generator.sh
+          docker compose -f docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
+        # run: |
+        #   echo "Running the generator"
+        #   ./generator.sh
       - name: Tmate session
         if: ${{ failure() }}
         uses: mxschmitt/action-tmate@v3
@@ -168,6 +169,10 @@ jobs:
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       - name: Docker meta base
         id: meta_base
         uses: docker/metadata-action@v4
@@ -210,6 +215,7 @@ jobs:
       - name: Build base
         uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           context: .
           file: ./Dockerfile.base
           push: ${{ github.event_name != 'pull_request' }}
@@ -218,6 +224,7 @@ jobs:
       - name: Build Server
         uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           context: .
           file: ./Dockerfile.server
           build-args: |
@@ -228,6 +235,7 @@ jobs:
       - name: Build Generator
         uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           context: .
           file: ./Dockerfile.generator
           build-args: |
@@ -250,7 +258,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -293,6 +304,7 @@ jobs:
       - name: Build base and push Docker image
         uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           context: .
           file: ./Dockerfile.base
           push: ${{ github.event_name != 'pull_request' }}
@@ -301,6 +313,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           context: .
           file: ./Dockerfile.server
           build-args: |
@@ -311,6 +324,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           context: .
           file: ./Dockerfile.generator
           build-args: |
