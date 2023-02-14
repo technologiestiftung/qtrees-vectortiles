@@ -21,10 +21,10 @@ services:
             #     - .env
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.server
             args:
-                - BASE_IMAGE=qtrees-vectortiles-generator-base:test
-        container_name: qtrees-vectortiles-generator
+                - BASE_IMAGE=qtrees-vectortiles_base:test
+        container_name: qtrees-vectortiles
         # in production this should have the following command
         command: --dir /tilesets --enable-fs-watch
         restart: always
