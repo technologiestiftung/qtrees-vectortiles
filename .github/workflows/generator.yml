@@ -19,7 +19,7 @@ jobs:
 
     environment: ${{ github.event.client_payload.environment }}
     container:
-      image: technologiestiftung/qtrees-vectortiles-base:2.6.0-rc.2
+      image: technologiestiftung/qtrees-vectortiles_base:2.6.1
       credentials:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}

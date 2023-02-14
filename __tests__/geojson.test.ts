@@ -3,6 +3,7 @@ import assert from "node:assert";
 import * as fs from "node:fs";
 
 const TEST_GEOJSON_FILE_PATH = process.env.TEST_GEOJSON_FILE_PATH;
+console.info("TEST_GEOJSON_FILE_PATH", TEST_GEOJSON_FILE_PATH);
 
 describe("gejson result tests", () => {
 	test("env var TEST_GEOJSON_FILE_PATH is defined", () => {

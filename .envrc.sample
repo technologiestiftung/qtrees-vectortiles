@@ -11,6 +11,6 @@ export TILESET_DIR=/tilesets
 export TILESET_NAME=trees.mbtiles
 export TMP_DIR=/tmp
 export GEOJSON_OUTPUT_DIR=$TMP_DIR
-export GEOJSON_OUTPUT_FILENAME=out.full.geojson
+export GEOJSON_OUTPUT_FILENAME=trees.geo.json
 export POSTGREST_API_URL=http://localhost:3000
 export POSTGRES_MATERIALIZE_VIEW_NAME=vector_tiles

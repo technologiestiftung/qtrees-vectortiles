@@ -35,6 +35,5 @@ tippecanoe \
 
 echo "system: Copying tileset to workdir directory..."
 cp "$TMP_DIR"/"$TILESET_NAME" "$WORKDIR"
-echo "tileset_path=$WORKDIR/$TILESET_NAME" >>"$GITHUB_OUTPUT"
 echo "system: Upload tileset to s3 bucket"
 aws s3api put-object --bucket "$AWS_BUCKET" --key "$TILESET_NAME" --body "$TMP_DIR/$TILESET_NAME"
