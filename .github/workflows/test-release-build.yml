@@ -259,7 +259,7 @@ jobs:
       - name: Build base and push Docker image
         uses: docker/build-push-action@v3
         with:
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.base
           push: ${{ github.event_name != 'pull_request' }}
@@ -268,7 +268,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.server
           build-args: |
@@ -279,7 +279,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile.generator
           build-args: |
