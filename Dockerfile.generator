@@ -1,3 +1,22 @@
-FROM technologiestiftung/qtrees-vectortiles-generator-base:latest
-WORKDIR /usr/app
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles_base:2.6
+FROM $BASE_IMAGE
+ENV TILESET_DIR /tilesets
+ENV TMP_DIR /tmp
+ENV TILESET_NAME trees.mbtiles
+ENV WORKDIR /usr/app
+ENV GEOJSON_OUTPUT_FILENAME trees.geo.json
+ENV POSTGRES_HOST postgres
+ENV POSTGRES_PORT 5432
+ENV POSTGRES_DB postgres
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD postgres
+ENV POSTGRES_MATERIALIZE_VIEW_NAME vector_tiles
+ENV AWS_DEFAULT_REGION eu-central-1
+#
+ENV AWS_BUCKET ""
+ENV AWS_ACCESS_KEY_ID ""
+ENV AWS_SECRET_ACCESS_KEY ""
+
+WORKDIR $WORKDIR
+COPY generator.sh generator.sh
+ENTRYPOINT ["generator.sh"]

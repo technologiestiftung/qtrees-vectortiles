@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles-generator-base:2.5
+ARG BASE_IMAGE=technologiestiftung/qtrees-vectortiles_base:2.6
 FROM $BASE_IMAGE
 
 ARG TILESET_DIR=/tilesets
