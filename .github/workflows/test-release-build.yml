@@ -168,7 +168,7 @@ jobs:
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v3
-      - name: Docker meta
+      - name: Docker meta base
         id: meta_base
         uses: docker/metadata-action@v4
         with:
@@ -178,17 +178,26 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-      - name: Docker meta
-        id: meta
+      - name: Docker meta server
+        id: meta_server
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME }}_server
           tags: |
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-
+      - name: Docker meta generator
+        id: meta_generator
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.IMAGE_NAME }}_generator
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
@@ -206,7 +215,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta_base.outputs.tags }}
           labels: ${{ steps.meta_base.outputs.labels }}
-      - name: Build
+      - name: Build Server
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -214,9 +223,18 @@ jobs:
           build-args: |
             BASE_IMAGE=${{ steps.meta_base.outputs.tags }}
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
+          tags: ${{ steps.meta_server.outputs.tags }}
+          labels: ${{ steps.meta_server.outputs.labels }}
+      - name: Build Generator
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.generator
+          build-args: |
+            BASE_IMAGE=${{ steps.meta_base.outputs.tags }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta_generator.outputs.tags }}
+          labels: ${{ steps.meta_generator.outputs.labels }}
   # We dont use ghcr yet. This is more like a redundanc backup
   build-and-push-ghcr:
     env:
