@@ -60,4 +60,4 @@ services:
     volumes:
       - /tilesets:/tilesets
       # - ./:/usr/app
-      - ./tmp:/tmp
+      - /tmp:/tmp
