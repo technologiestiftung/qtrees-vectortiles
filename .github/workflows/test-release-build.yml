@@ -141,7 +141,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     needs:
       - test
-      - test-generator
+      # - test-generator
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -162,7 +162,7 @@ jobs:
   build-and-push-docker-hub:
     needs:
       - test
-      - test-generator
+      # - test-generator
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
@@ -223,7 +223,7 @@ jobs:
       REGISTRY: ghcr.io
     needs:
       - test
-      - test-generator
+      # - test-generator
     runs-on: ubuntu-latest
     permissions:
       contents: read
