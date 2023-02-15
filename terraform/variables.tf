@@ -37,11 +37,12 @@ variable "vpc_id" {
 
 variable "image" {
   description = "the image to use for your task"
-  default     = "technologiestiftung/qtrees-vector-tiles_generator:v2.13.0-dev"
+  default     = "technologiestiftung/qtrees-vectortiles_generator:2.6.2"
 }
 variable "schedule_expression" {
   description = "The schedule to run in. Could also be cron(*/5 * * * *) see https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html"
-  default     = "cron(0 7 * * ? *)"
+  default     = "cron(0/5 * * * ? *)"
+  # default     = "cron(0 7 * * ? *)"
 }
 
 variable "tag_project" {
@@ -53,13 +54,63 @@ variable "tag_project" {
 
 # env vars
 
-variable "aws_access_key_id" {
-  description = "The aws access key for your profile. Todo? Make the task use task_role_arn instead of passing the keys in env"
+variable "TILESET_DIR" {
+  type        = string
+  description = ""
 }
-
-variable "aws_secret_access_key" {
-  description = "The aws access key for your profile. Todo? Make the task use task_role_arn instead of passing the keys in env"
-
+variable "TMP_DIR" {
+  type        = string
+  description = ""
 }
-
-
+variable "TILESET_NAME" {
+  type        = string
+  description = ""
+}
+variable "WORKDIR" {
+  type        = string
+  description = ""
+}
+variable "GEOJSON_OUTPUT_FILENAME" {
+  type        = string
+  description = ""
+}
+variable "POSTGRES_HOST" {
+  type        = string
+  description = ""
+}
+variable "POSTGRES_PORT" {
+  type        = string
+  description = ""
+}
+variable "POSTGRES_DB" {
+  type        = string
+  description = ""
+}
+variable "POSTGRES_USER" {
+  type        = string
+  description = ""
+}
+variable "POSTGRES_PASSWORD" {
+  type        = string
+  description = ""
+}
+variable "POSTGRES_MATERIALIZE_VIEW_NAME" {
+  type        = string
+  description = ""
+}
+variable "AWS_DEFAULT_REGION" {
+  type        = string
+  description = ""
+}
+variable "AWS_BUCKET" {
+  type        = string
+  description = ""
+}
+variable "AWS_ACCESS_KEY_ID" {
+  type        = string
+  description = ""
+}
+variable "AWS_SECRET_ACCESS_KEY" {
+  type        = string
+  description = ""
+}

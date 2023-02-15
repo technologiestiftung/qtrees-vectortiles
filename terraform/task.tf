@@ -1,5 +1,5 @@
-resource "aws_cloudwatch_log_group" "cronbot" {
-  name = "${var.prefix}-${var.name}-${var.env}"
+resource "aws_cloudwatch_log_group" "vectortiles" {
+  name              = "${var.prefix}-${var.name}-${var.env}"
   retention_in_days = 7
   tags = {
     name    = "${var.prefix}-${var.name}-${var.env}"
@@ -24,7 +24,7 @@ resource "aws_ecs_task_definition" "task" {
 "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "${aws_cloudwatch_log_group.cronbot.name}",
+                    "awslogs-group": "${aws_cloudwatch_log_group.vectortiles.name}",
                     "awslogs-region": "${var.region}",
                     "awslogs-stream-prefix": "${var.prefix}"
                 }
@@ -35,61 +35,65 @@ resource "aws_ecs_task_definition" "task" {
       "value":"'[\"json-file\",\"awslogs\"]'"
       },
       {
-        "name": "AUTH0_TOKEN_ISSUER",
-        "value": "${var.auth0_token_issuer}"
+        "name": "TILESET_DIR",
+        "value": "${var.TILESET_DIR}"
       },
       {
-        "name": "AUTH0_AUDIENCE",
-        "value": "${var.auth0_audience}"
+        "name": "TMP_DIR",
+        "value": "${var.TMP_DIR}"
       },
       {
-        "name": "AUTH0_CLIENT_ID",
-        "value": "${var.auth0_client_id}"
+        "name": "TILESET_NAME",
+        "value": "${var.TILESET_NAME}"
       },
       {
-        "name": "AUTH0_CLIENT_SECRET",
-        "value": "${var.auth0_client_secret}"
+        "name": "WORKDIR",
+        "value": "${var.WORKDIR}"
       },
       {
-        "name": "API_HOST",
-        "value": "${var.api_host}"
+        "name": "GEOJSON_OUTPUT_FILENAME",
+        "value": "${var.GEOJSON_OUTPUT_FILENAME}"
       },
       {
-        "name": "API_VERSION",
-        "value": "${var.api_version}"
+        "name": "POSTGRES_HOST",
+        "value": "${var.POSTGRES_HOST}"
       },
       {
-        "name": "FLSSHYGN_PREDICT_URL",
-        "value": "${var.flsshygn_predict_url}"
+        "name": "POSTGRES_PORT",
+        "value": "${var.POSTGRES_PORT}"
       },
       {
-        "name": "FLSSHYGN_CALIBRATE_URL",
-        "value": "${var.flsshygn_calibrate_url}"
+        "name": "POSTGRES_DB",
+        "value": "${var.POSTGRES_DB}"
       },
       {
-        "name":"SMTP_HOST",
-        "value": "${var.smtp_host}"
+        "name": "POSTGRES_USER",
+        "value": "${var.POSTGRES_USER}"
+      },
+            {
+        "name": "POSTGRES_PASSWORD",
+        "value": "${var.POSTGRES_PASSWORD}"
       },
       {
-        "name":"SMTP_USER",
-        "value": "${var.smtp_user}"
+        "name": "POSTGRES_MATERIALIZE_VIEW_NAME",
+        "value": "${var.POSTGRES_MATERIALIZE_VIEW_NAME}"
+      },
+      { "name":"AWS_DEFAULT_REGION"
+      , "value":"${var.AWS_DEFAULT_REGION}"
       },
       {
-        "name":"SMTP_PW",
-        "value": "${var.smtp_pw}"
+        "name":"AWS_ACCESS_KEY_ID",
+        "value":"${var.AWS_ACCESS_KEY_ID}"
       },
       {
-        "name":"SMTP_PORT",
-        "value": "${var.smtp_port}"
-      },
-      {
-        "name":"SMTP_FROM",
-        "value": "${var.smtp_from}"
-      },
-      {
-        "name":"SMTP_ADMIN_TO",
-        "value": "${var.smtp_admin_to}"
+        "name":"AWS_SECRET_ACCESS_KEY",
+        "value":"${var.AWS_SECRET_ACCESS_KEY}"
+      },{
+        "name": "AWS_BUCKET",
+        "value":"${var.AWS_BUCKET}"
       }
+
+
     ],
     "name": "${var.prefix}-${var.name}-${var.env}",
     "image": "${var.image}",

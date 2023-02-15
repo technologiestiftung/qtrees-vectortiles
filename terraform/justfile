@@ -1,0 +1,16 @@
+
+alias tfp := tf-plan
+alias tfa := tf-apply
+alias tfd := tf-destroy
+default:
+  just --list
+
+tf-plan:
+  terraform plan
+
+tf-apply:
+  terraform plan -out planfile
+  terraform apply -parallelism=1 planfile 
+
+tf-destroy:
+  terraform destroy
