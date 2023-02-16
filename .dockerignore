@@ -13,3 +13,4 @@ nightly-release.txt
 prettier.config.cjs
 render.yaml
 release.config.*js
+node_modules

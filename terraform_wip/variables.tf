@@ -23,6 +23,11 @@ variable "env" {
   default     = "dev"
 }
 
+variable "description" {
+  description = "The description of resource"
+  default     = "running the vector tiles generator"
+
+}
 variable "availability_zones" {
   description = "I Think there are only 3 in europe"
   default     = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
@@ -34,6 +39,13 @@ variable "az_count" {
 variable "vpc_id" {
   description = "The ID of your existing VPC where all the groups will be created in"
 }
+
+# variable "subnets" {
+#   description = "The IDs of your existing subnets where all the groups will be created in"
+#   type        = list(string)
+# }
+
+
 
 variable "image" {
   description = "the image to use for your task"
