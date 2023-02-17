@@ -17,8 +17,8 @@ jobs:
     name: Generate the tileset
     runs-on: ubuntu-latest
 
-    environment: "staging"
-    # environment: ${{ github.event.client_payload.environment }}
+    # environment: "staging"
+    environment: ${{ github.event.client_payload.environment }}
     steps:
       - name: Run generator
         env:
