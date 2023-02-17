@@ -35,7 +35,11 @@ jobs:
           TILESET_NAME: "trees.mbtiles"
           TILESET_DIR: "/tilesets"
           TMP_DIR: "/tmp"
-          GEOJSON_OUTPUT_FILENAME: "/trees.geo.json"
+          # Changinng the name of the output file will
+          # will need a change in the frontend as well.
+          # See https://github.com/technologiestiftung/baumblick-frontend/blob/7768f5809d024197e26f0b96f55d7d8593a7f6f4/src/components/TreesMap/treesLayer.ts#L13
+
+          GEOJSON_OUTPUT_FILENAME: "trees.geo.json"
           POSTGRES_MATERIALIZE_VIEW_NAME: "vector_tiles"
           AWS_DEFAULT_REGION: eu-central-1
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
