@@ -1,3 +1,6 @@
+# NOTE: This file is just an example os is not used in our current setup
+# We set the render service manually because we use two environments.
+# Staging and production.
 services:
   - type: web
     name: qtrees-vectortiles
@@ -8,15 +11,6 @@ services:
     dockerContext: .
     dockerfilePath: Dockerfile.server
     envVars:
-      - key: POSTGRES_HOST
-        sync: false
-      - key: POSTGRES_DB
-        sync: false
-      - key: POSTGRES_USER
-        sync: false
-      - key: POSTGRES_PASSWORD
-        sync: false
-
       - key: AWS_SECRET_ACCESS_KEY
         sync: false
       - key: AWS_ACCESS_KEY_ID
@@ -27,7 +21,7 @@ services:
         sync: false
 
       - key: BASE_IMAGE
-        value: technologiestiftung/qtrees-vectortiles-generator-base:2.5
+        value: technologiestiftung/qtrees-vectortiles_base:2.6.2
         sync: true
       - key: TILESET_NAME
         value: trees.mbtiles

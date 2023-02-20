@@ -2,7 +2,7 @@ README.md
 readme.md
 docker-compose*.yml
 .gitignore
-Dockerfile*
+# Dockerfile*
 .env
 .vscode
 .github
