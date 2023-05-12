@@ -11,6 +11,9 @@ export TILESET_DIR=/tilesets
 export TILESET_NAME=trees.mbtiles
 export TMP_DIR=/tmp
 export GEOJSON_OUTPUT_DIR=$TMP_DIR
+# Changinng the name of the output file will
+# will need a change in the frontend as well.
+# See https://github.com/technologiestiftung/baumblick-frontend/blob/7768f5809d024197e26f0b96f55d7d8593a7f6f4/src/components/TreesMap/treesLayer.ts#L13
 export GEOJSON_OUTPUT_FILENAME=trees.geo.json
 export POSTGREST_API_URL=http://localhost:3000
 export POSTGRES_MATERIALIZE_VIEW_NAME=vector_tiles
