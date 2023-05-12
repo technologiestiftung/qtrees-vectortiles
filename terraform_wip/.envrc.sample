@@ -1,0 +1,26 @@
+# shellcheck disable=SC2148
+# needed by terraform
+
+export TF_VAR_profile="default"
+
+# staging env
+
+export TF_VAR_vpc_id="vpc-123"
+
+# needed by container
+export TF_VAR_TILESET_DIR="/tileset"
+export TF_VAR_TMP_DIR="/tmp"
+export TF_VAR_TILESET_NAME="trees.mbtiles"
+export TF_VAR_WORKDIR="/usr/app"
+export TF_VAR_GEOJSON_OUTPUT_FILENAME="trees.geo.json"
+export TF_VAR_POSTGRES_HOST="foo.bah.eu-central-1.rds.amazonaws.com"
+export TF_VAR_POSTGRES_PORT="5432"
+export TF_VAR_POSTGRES_DB="qtrees"
+export TF_VAR_POSTGRES_USER="foo"
+export TF_VAR_POSTGRES_PASSWORD="foo"
+
+export TF_VAR_POSTGRES_MATERIALIZE_VIEW_NAME="vector_tiles"
+export TF_VAR_AWS_DEFAULT_REGION="eu-central-1"
+export TF_VAR_AWS_BUCKET="foo"
+export TF_VAR_AWS_ACCESS_KEY_ID="AK123"
+export TF_VAR_AWS_SECRET_ACCESS_KEY="123"
