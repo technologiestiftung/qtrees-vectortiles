@@ -176,3 +176,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 _data/temp/trees.geo.json
+terraform_wip/planfile
