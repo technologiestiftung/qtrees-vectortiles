@@ -40,6 +40,10 @@ variable "vpc_id" {
   description = "The ID of your existing VPC where all the groups will be created in"
 }
 
+variable "security_group_id" {
+  description = "The ID of your existing security group where all the groups will be created in"
+}
+
 # variable "subnets" {
 #   description = "The IDs of your existing subnets where all the groups will be created in"
 #   type        = list(string)
