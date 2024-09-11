@@ -6,6 +6,8 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+> Note: This project is part of the [Baumblick](https://github.com/technologiestiftung/baumblick-frontend) application, which is in demo mode since 2024-07-01. The tileserver implemented in this repository is therefore shut down.
+
 # QTrees Vector Tiles Generator
 
 This project is a pipeline to generate vector tiles based on a PGSQL Database. It uses gdal, tippecanoe and mbtileserver to generate and serve vector tiles. It is a part of the QTrees.ai project.
