@@ -135,7 +135,7 @@ jobs:
       #   uses: docker/setup-buildx-action@v2
       - name: Docker meta base
         id: meta_base
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}_base
           tags: |
@@ -145,7 +145,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
       - name: Docker meta server
         id: meta_server
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}_server
           tags: |
@@ -155,7 +155,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
       - name: Docker meta generator
         id: meta_generator
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}_generator
           tags: |
@@ -230,7 +230,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract metadata (tags, labels) for Docker base
         id: metaghcr_base
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}_base
           tags: |
@@ -240,7 +240,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
       - name: Extract metadata (tags, labels) for Docker server
         id: metaghcr_server
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}_server
           tags: |
@@ -250,7 +250,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
       - name: Extract metadata (tags, labels) for Docker generator
         id: metaghcr_generator
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}_generator
           tags: |
