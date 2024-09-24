@@ -43,7 +43,7 @@ jobs:
         run: |
           docker run --rm -v $PWD:$TMP_DIR -w $WORKDIR -e POSTGRES_HOST -e POSTGRES_DB -e POSTGRES_USER -e POSTGRES_PASSWORD -e TILESET_NAME -e TILESET_DIR -e TMP_DIR -e GEOJSON_OUTPUT_FILENAME -e POSTGRES_MATERIALIZE_VIEW_NAME -e AWS_DEFAULT_REGION -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_BUCKET technologiestiftung/qtrees-vectortiles_generator:2.6.2
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: tileset
           path: trees.mbtiles
