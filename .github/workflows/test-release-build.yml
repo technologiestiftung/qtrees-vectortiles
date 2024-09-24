@@ -82,7 +82,7 @@ jobs:
         run: |
           docker compose -f docker-compose.generator.yml up --abort-on-container-exit --no-color --exit-code-from generator
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
       - run: npm ci
@@ -110,7 +110,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
       - name: Install dependencies
